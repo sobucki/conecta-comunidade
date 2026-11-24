@@ -1,0 +1,98 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #142e40;
+  background: #f3f6fa;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 48rem;
+  margin: 12vh auto;
+  padding: 2rem;
+}
+h1 {
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  line-height: 1.1;
+  margin: 1rem 0 1.5rem;
+  letter-spacing: -0.04em;
+}
+p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 38rem;
+}
+.eyebrow {
+  color: #235e81;
+  font-size: 1rem;
+  font-weight: 650;
+}
+a {
+  display: inline-block;
+  color: #fff;
+  background: #174d70;
+  padding: 0.9rem 1.25rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+a:hover {
+  background: #103b57;
+}
+a:focus-visible {
+  outline: 3px solid #d67b00;
+  outline-offset: 4px;
+}
+form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 30rem;
+  margin-top: 2rem;
+}
+label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+input {
+  width: 100%;
+  border: 1px solid #6c8190;
+  border-radius: 0.35rem;
+  padding: 0.8rem;
+  font: inherit;
+  margin-bottom: 0.5rem;
+}
+input:focus-visible {
+  outline: 3px solid #235e81;
+  outline-offset: 2px;
+}
+button {
+  background: #174d70;
+  color: white;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+button:focus-visible {
+  outline: 3px solid #d67b00;
+  outline-offset: 3px;
+}
+.text-link,
+form a {
+  padding: 0;
+  margin: 0;
+  color: #174d70;
+  background: transparent;
+  text-decoration: underline;
+}

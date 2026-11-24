@@ -9,7 +9,7 @@ O [roadmap de desenvolvimento](conecta-comunidade-roadmap.md) organiza os marcos
 | Informação | Definição |
 | --- | --- |
 | Data da consolidação | 23/11/2026 |
-| Situação | Escopo e estrutura técnica acordados; implementação a iniciar |
+| Situação | M1 Base e acessos implementado e verificado localmente; próximo marco M2 |
 | Público do piloto | Uma escola e participantes adultos de sua comunidade |
 | Primeira entrega do produto | Fluxo até a seleção, aguardando formalização externa |
 | Prazo e disponibilidade da equipe | Em aberto |

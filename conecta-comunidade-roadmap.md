@@ -4,14 +4,14 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** planejamento consolidado; implementação a iniciar. O próximo marco é M1. Datas, estimativas e distribuição entre integrantes permanecem em aberto, assim como os detalhes da hospedagem Hostinger.
+**Situação atual:** M1 Base e acessos implementado e verificado localmente. O próximo marco é M2. Datas, estimativas e distribuição entre integrantes permanecem em aberto, assim como os detalhes da hospedagem Hostinger. A configuração e as evidências do primeiro marco estão em [M1 Base e acessos](docs/m1-base-acessos.md).
 
 ## 1 Visão dos marcos
 
 | Marco | Resultado | Dependência | Situação inicial |
 | --- | --- | --- | --- |
 | M0 Planejamento | Escopo, stack, regras e entregas definidos. | Refinamento dos requisitos. | Concluído |
-| M1 Base e acessos | Aplicação local com escola, contas e permissões. | M0 | A iniciar |
+| M1 Base e acessos | Aplicação local com escola, contas e permissões. | M0 | Concluído localmente |
 | M2 Publicação e divulgação | Diretora publica; visitante consulta e compartilha. | M1 | Planejado |
 | M3 Participação | Prestador se cadastra e gerencia suas candidaturas. | M2 | Planejado |
 | M4 Seleção e exceções | Diretora seleciona e trata os demais resultados. | M3 | Planejado |
@@ -42,13 +42,13 @@ flowchart TD
 
 **Objetivo:** estabelecer a aplicação e os limites de acesso antes de implementar os fluxos públicos.
 
-- [ ] Configurar o projeto único Next.js, TypeScript e Payload, fixando versões compatíveis.
-- [ ] Configurar PostgreSQL de desenvolvimento e a modelagem inicial prevista no plano.
-- [ ] Criar dados fictícios para escola, gestora, administrador e prestadores.
-- [ ] Implementar os papéis, a associação à escola e as permissões no servidor.
-- [ ] Permitir ao administrador cadastrar escola e gestora e administrar contas e bloqueios.
-- [ ] Configurar e validar a recuperação de senha por e-mail no ambiente de desenvolvimento.
-- [ ] Preparar Vitest e Playwright e verificar as permissões principais.
+- [x] Configurar o projeto único Next.js, TypeScript e Payload, fixando versões compatíveis.
+- [x] Configurar PostgreSQL de desenvolvimento e a modelagem inicial prevista no plano.
+- [x] Criar dados fictícios para escola, gestora, administrador e prestadores.
+- [x] Implementar os papéis, a associação à escola e as permissões no servidor.
+- [x] Permitir ao administrador cadastrar escola e gestora e administrar contas e bloqueios.
+- [x] Configurar e validar a recuperação de senha por e-mail no ambiente de desenvolvimento.
+- [x] Preparar Vitest e Playwright e verificar as permissões principais.
 
 **Demonstração de conclusão:** o administrador configura uma escola e sua gestora; ela acessa somente o contexto autorizado; o prestador não acessa o painel nem concede privilégios a si próprio. A recuperação de senha é exercitada com um serviço de e-mail de desenvolvimento.
 
@@ -157,7 +157,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-O próximo trabalho é **M1 Base e acessos**. A escolha das versões compatíveis e o detalhamento do modelo de dados fazem parte desse marco.
+O próximo trabalho é **M2 Publicação e divulgação**, aproveitando a base de contas, escolas e permissões implementada no M1.
 
 ## 6 Evolução após o MVP
 

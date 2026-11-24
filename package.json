@@ -1,0 +1,51 @@
+{
+  "name": "conecta-comunidade",
+  "version": "0.1.0",
+  "description": "Conecta Comunidade — piloto escolar",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap",
+    "payload": "payload",
+    "dev:setup": "node scripts/setup-dev.mjs",
+    "services:up": "docker compose up -d --wait",
+    "services:down": "docker compose stop",
+    "seed:dev": "tsx scripts/seed-dev.ts",
+    "db:migrate": "payload migrate",
+    "db:migrate:create": "payload migrate:create",
+    "test:int": "vitest run",
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "test": "npm run test:int && npm run test:e2e"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "3.94.1",
+    "@payloadcms/email-nodemailer": "3.94.1",
+    "@payloadcms/next": "3.94.1",
+    "@payloadcms/translations": "3.94.1",
+    "@payloadcms/ui": "3.94.1",
+    "dotenv": "16.4.7",
+    "graphql": "^16.8.1",
+    "next": "16.4.6",
+    "payload": "3.94.1",
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.19.9",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "tsx": "4.23.15",
+    "typescript": "5.7.3",
+    "vite-tsconfig-paths": "6.0.5",
+    "vitest": "4.1.12"
+  },
+  "engines": {
+    "node": "^24.22.3 || >=26.13.1"
+  },
+  "private": true
+}
