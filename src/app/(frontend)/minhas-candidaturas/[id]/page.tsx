@@ -6,13 +6,12 @@ import { AcceptedConditions } from '@/components/AcceptedConditions'
 import { ProviderNavigation } from '@/components/ProviderNavigation'
 import { ParticipationForm } from '@/components/ParticipationForm'
 import { conditionsToken } from '@/participation/rules'
+import {
+  applicationStatusLabels,
+  applicationEventLabels,
+  applicationResult,
+} from '@/selection/status'
 
-const eventLabels: Record<string, string> = {
-  submit: 'Candidatura enviada',
-  edit: 'Candidatura editada',
-  withdraw: 'Candidatura retirada',
-  resubmit: 'Candidatura reenviada',
-}
 export const metadata = { robots: { index: false, follow: false } }
 
 export default async function ApplicationDetail({
@@ -51,10 +50,10 @@ export default async function ApplicationDetail({
       <p className="eyebrow">Minha candidatura</p>
       <h1>{opportunity?.title || 'Oportunidade'}</h1>
       <p className="application-status">
-        <strong>
-          Situação:{' '}
-          {application.status === 'SUBMITTED' ? 'Enviada' : 'Retirada'}
-        </strong>
+        <strong>Situação: {applicationStatusLabels[application.status]}</strong>
+      </p>
+      <p className="participation-note">
+        {applicationResult(application, opportunity)}
       </p>
       {opportunity && (
         <Link href={`/oportunidades/${opportunity.id}`}>Ver oportunidade</Link>
@@ -109,7 +108,7 @@ export default async function ApplicationDetail({
                 : {}
             return (
               <li key={event.id}>
-                <strong>{eventLabels[event.action]}</strong>
+                <strong>{applicationEventLabels[event.action]}</strong>
                 <span>{dateTime(event.createdAt)}</span>
                 <details>
                   <summary>Dados desta revisão</summary>

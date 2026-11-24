@@ -1,5 +1,6 @@
 import { APIError, type CollectionConfig } from 'payload'
 import { readParticipation } from '../participation/rules'
+import { managementPanel } from '../access'
 
 export const ApplicationEvents: CollectionConfig = {
   slug: 'application-events',
@@ -65,9 +66,24 @@ export const ApplicationEvents: CollectionConfig = {
       name: 'action',
       type: 'select',
       required: true,
-      options: ['submit', 'edit', 'withdraw', 'resubmit'],
+      options: [
+        'submit',
+        'edit',
+        'withdraw',
+        'resubmit',
+        'selected',
+        'not_selected',
+        'selection_withdrawn',
+        'cancelled',
+      ],
     },
     { name: 'revision', type: 'number', required: true },
     { name: 'snapshot', type: 'json', required: true },
+    {
+      name: 'privateReason',
+      type: 'textarea',
+      maxLength: 2000,
+      access: { read: managementPanel },
+    },
   ],
 }

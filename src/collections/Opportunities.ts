@@ -9,6 +9,11 @@ import { auditChange } from '../hooks/audit'
 import { lockOpportunityUpdate } from '../opportunities/transaction'
 import { conditionFields, conditionValue } from '../participation/rules'
 import { applyEndpoint, conditionsEndpoint } from '../participation/actions'
+import { decisionEndpoint } from '../selection/actions'
+import {
+  currentOpportunityStatus,
+  opportunityStatusLabels,
+} from '../selection/status'
 import {
   assignedSchool,
   manageSchoolRecords,
@@ -26,27 +31,47 @@ const validateOpportunity: CollectionBeforeValidateHook = async ({
 }) => {
   if (!data) return data
   const publishing = req.context.publishingOpportunity === true
+  const deciding = req.context.selectionAction === true
   if (
     (operation === 'create' && data.status && data.status !== 'DRAFT') ||
     (operation === 'update' &&
       data.status &&
       data.status !== originalDoc?.status &&
-      !publishing)
+      !publishing &&
+      !deciding)
   ) {
     throw new APIError(
       'Use a ação Publicar para disponibilizar a oportunidade.',
       400,
     )
   }
+  if (publishing && (operation !== 'update' || originalDoc?.status !== 'DRAFT'))
+    throw new APIError('Esta oportunidade já foi publicada.', 409)
   data.school = assignedSchool(req, data.school, originalDoc?.school)
   data.createdBy = originalDoc?.createdBy ?? req.user?.id
-  data.status = publishing ? 'OPEN' : (originalDoc?.status ?? 'DRAFT')
+  data.status = publishing
+    ? 'OPEN'
+    : deciding
+      ? (data.status ?? originalDoc?.status)
+      : (originalDoc?.status ?? 'DRAFT')
   data.publishedAt = publishing
     ? new Date().toISOString()
     : (originalDoc?.publishedAt ?? null)
   data.publishedBy = publishing
     ? req.user?.id
     : (originalDoc?.publishedBy ?? null)
+  for (const key of [
+    'decisionRevision',
+    'closedAt',
+    'closedBy',
+    'selectedApplication',
+    'selectedAt',
+    'selectedBy',
+    'resolutionReason',
+  ]) {
+    if (!deciding)
+      data[key] = originalDoc?.[key] ?? (key === 'decisionRevision' ? 0 : null)
+  }
   const values = { ...originalDoc, ...data }
   if (operation === 'update') {
     const existing = await req.payload.count({
@@ -56,7 +81,9 @@ const validateOpportunity: CollectionBeforeValidateHook = async ({
       where: { opportunity: { equals: originalDoc!.id } },
     })
     if (
-      existing.totalDocs &&
+      (existing.totalDocs ||
+        (currentOpportunityStatus(originalDoc!) !== 'OPEN' &&
+          originalDoc!.status !== 'DRAFT')) &&
       conditionFields.some(
         (key) =>
           key in data &&
@@ -138,6 +165,19 @@ export const Opportunities: CollectionConfig = {
     { path: '/:id/publish', method: 'post', handler: publish },
     { path: '/:id/apply', method: 'post', handler: applyEndpoint },
     { path: '/:id/conditions', method: 'get', handler: conditionsEndpoint },
+    ...(
+      [
+        'close',
+        'select',
+        'selected-withdrawal',
+        'cancel',
+        'close-without-selection',
+      ] as const
+    ).map((action) => ({
+      path: `/:id/${action}`,
+      method: 'post' as const,
+      handler: decisionEndpoint(action),
+    })),
   ],
   hooks: {
     beforeOperation: [lockOpportunityUpdate],
@@ -145,6 +185,16 @@ export const Opportunities: CollectionConfig = {
     afterChange: [auditChange],
   },
   fields: [
+    {
+      name: 'decisionControls',
+      type: 'ui',
+      admin: {
+        components: {
+          Field:
+            '@/components/admin/OpportunityDecisionControls#OpportunityDecisionControls',
+        },
+      },
+    },
     {
       name: 'title',
       label: 'Título do reparo',
@@ -304,14 +354,22 @@ export const Opportunities: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'DRAFT',
-      options: [
-        { label: 'Rascunho', value: 'DRAFT' },
-        { label: 'Aberta', value: 'OPEN' },
-      ],
-      admin: { position: 'sidebar', readOnly: true },
+      options: Object.entries(opportunityStatusLabels).map(
+        ([value, label]) => ({ value, label }),
+      ),
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        style: { display: 'none' },
+        components: {
+          Cell: '@/components/admin/OpportunityStatusCell#OpportunityStatusCell',
+        },
+      },
       access: {
         create: () => false,
-        update: ({ req }) => req.context.publishingOpportunity === true,
+        update: ({ req }) =>
+          req.context.publishingOpportunity === true ||
+          req.context.selectionAction === true,
       },
     },
     {
@@ -320,6 +378,84 @@ export const Opportunities: CollectionConfig = {
       type: 'date',
       admin: { position: 'sidebar', readOnly: true },
       access: { create: () => false, update: () => false },
+    },
+    {
+      name: 'decisionRevision',
+      label: 'Revisão das decisões',
+      type: 'number',
+      defaultValue: 0,
+      admin: { hidden: true },
+      access: {
+        create: () => false,
+        update: ({ req }) => req.context.selectionAction === true,
+      },
+    },
+    {
+      name: 'currentStatus',
+      label: 'Situação atual',
+      type: 'select',
+      virtual: true,
+      options: Object.entries(opportunityStatusLabels).map(
+        ([value, label]) => ({ value, label }),
+      ),
+      admin: { readOnly: true, position: 'sidebar' },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) =>
+            currentOpportunityStatus(
+              siblingData as { status: string; applicationDeadline: string },
+            ),
+        ],
+      },
+    },
+    ...(['closedAt', 'selectedAt'] as const).map((name) => ({
+      name,
+      label: name === 'closedAt' ? 'Inscrições encerradas em' : 'Seleção em',
+      type: 'date' as const,
+      admin: { readOnly: true },
+      access: {
+        create: () => false,
+        update: ({ req }: { req: PayloadRequest }) =>
+          req.context.selectionAction === true,
+      },
+    })),
+    ...(['closedBy', 'selectedBy'] as const).map((name) => ({
+      name,
+      label: name === 'closedBy' ? 'Encerradas por' : 'Seleção por',
+      type: 'relationship' as const,
+      relationTo: 'users' as const,
+      maxDepth: 0,
+      admin: { hidden: true },
+      access: {
+        read: managementPanel,
+        create: () => false,
+        update: ({ req }: { req: PayloadRequest }) =>
+          req.context.selectionAction === true,
+      },
+    })),
+    {
+      name: 'selectedApplication',
+      label: 'Candidatura selecionada',
+      type: 'relationship',
+      relationTo: 'applications',
+      maxDepth: 0,
+      admin: { hidden: true },
+      access: {
+        read: managementPanel,
+        create: () => false,
+        update: ({ req }) => req.context.selectionAction === true,
+      },
+    },
+    {
+      name: 'resolutionReason',
+      label: 'Justificativa administrativa',
+      type: 'textarea',
+      admin: { readOnly: true },
+      access: {
+        read: managementPanel,
+        create: () => false,
+        update: ({ req }) => req.context.selectionAction === true,
+      },
     },
     {
       name: 'createdBy',

@@ -1,5 +1,6 @@
 import 'dotenv/config'
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { postgresAdapter, sql } from '@payloadcms/db-postgres'
+import { uniqueIndex } from '@payloadcms/db-postgres/drizzle/pg-core'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { pt } from '@payloadcms/translations/languages/pt'
 import path from 'node:path'
@@ -14,6 +15,7 @@ import { Media } from './collections/Media'
 import { SiteContent } from './globals/SiteContent'
 import { Applications } from './collections/Applications'
 import { ApplicationEvents } from './collections/ApplicationEvents'
+import { OpportunityEvents } from './collections/OpportunityEvents'
 import sharp from 'sharp'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -43,6 +45,7 @@ export default buildConfig({
     Media,
     Applications,
     ApplicationEvents,
+    OpportunityEvents,
   ],
   globals: [SiteContent],
   sharp,
@@ -58,6 +61,21 @@ export default buildConfig({
     pool: { connectionString: process.env.DATABASE_URL },
     push: process.env.NODE_ENV !== 'production',
     migrationDir: path.resolve(dirname, 'migrations'),
+    afterSchemaInit: [
+      ({ schema, extendTable }) => {
+        extendTable({
+          table: schema.tables.applications,
+          extraConfig: (columns) => ({
+            applications_one_selected_idx: uniqueIndex(
+              'applications_one_selected_idx',
+            )
+              .on(columns.opportunity)
+              .where(sql`${columns.status} = 'SELECTED'`),
+          }),
+        })
+        return schema
+      },
+    ],
   }),
   email: nodemailerAdapter({
     defaultFromAddress: process.env.SMTP_FROM || 'acesso@conecta.test',

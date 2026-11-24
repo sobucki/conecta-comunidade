@@ -8,6 +8,7 @@ import {
 import { lockOpportunity } from '../opportunities/transaction'
 import { relationID } from '../opportunities/rules'
 import { acceptedConditions, conditionsToken, requireProvider } from './rules'
+import { recordApplicationEvent } from './history'
 import type { Application } from '../payload-types'
 
 export type ParticipationAction = 'submit' | 'edit' | 'withdraw' | 'resubmit'
@@ -181,28 +182,7 @@ export async function changeParticipation(
             submittedAt: now,
           },
         })
-    await req.payload.create({
-      collection: 'application-events',
-      req,
-      overrideAccess: true,
-      data: {
-        application: doc.id,
-        school: relationID(opportunity.school)!,
-        candidate: user.id,
-        action,
-        revision: doc.revision,
-        actor: user.id,
-        snapshot: {
-          availability: doc.availability,
-          experience: doc.experience,
-          status: doc.status,
-          candidateName: doc.candidateName,
-          profile: doc.profileSnapshot,
-          acceptedAt: doc.acceptedAt,
-          conditions: doc.acceptedConditions,
-        },
-      },
-    })
+    await recordApplicationEvent(req, doc, action)
     if (started) await commitTransaction(req)
     return doc
   } catch (error) {

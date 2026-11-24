@@ -18,7 +18,7 @@ O cadastro ou login iniciado pelo link retorna à candidatura da oportunidade. I
 
 Para testar o perfil, abra **Meu perfil** e altere nome, telefone, vínculo, habilidades ou apresentação profissional. O e-mail de acesso é exibido para consulta. As candidaturas anteriores preservam o perfil informado no envio ou na última edição; editar ou reenviar a candidatura registra os dados atuais e mantém as versões anteriores no histórico.
 
-As contas de demonstração e a senha inicial estão descritas no README. O seed acrescenta uma candidatura fictícia de `prestador@conecta.test` à oportunidade **Pintura do muro de entrada**, se ela estiver aberta, dentro do prazo e ainda não tiver esse registro. Reexecutar o seed preserva candidaturas retiradas, alterações, histórico e senhas existentes.
+As contas de demonstração e a senha inicial estão descritas no README. O seed prepara candidaturas fictícias de `prestador@conecta.test` e `prestadora@conecta.test` na oportunidade **Pintura do muro de entrada**, se ela estiver aberta, dentro do prazo e ainda não tiver esses registros. Reexecutar o seed preserva candidaturas retiradas, alterações, histórico e senhas existentes.
 
 | Área                           | Caminho                           |
 | ------------------------------ | --------------------------------- |
@@ -35,7 +35,7 @@ As contas de demonstração e a senha inicial estão descritas no README. O seed
 
 Entre em [localhost:3000/admin](http://localhost:3000/admin) com `diretora@conecta.test`. Abra uma oportunidade e use **Consultar candidatos**, que leva à lista filtrada por oportunidade. Também é possível acessar Candidaturas pelo menu do painel.
 
-Abra o nome do candidato para consultar telefone, e-mail, vínculo autodeclarado, habilidades, apresentação profissional, disponibilidade, condições aceitas e datas. Esses dados correspondem ao envio ou à última edição da candidatura. A consulta inclui candidaturas retiradas, identificadas pela situação, para preservar a participação anterior. Os registros são somente de leitura neste marco; a seleção e as demais decisões serão implementadas no M4.
+Abra o nome do candidato para consultar telefone, e-mail, vínculo autodeclarado, habilidades, apresentação profissional, disponibilidade, condições aceitas e datas. Esses dados correspondem ao envio ou à última edição da candidatura. A consulta inclui candidaturas retiradas, identificadas pela situação, para preservar a participação anterior. O [M4 Seleção e exceções](m4-selecao-excecoes.md) acrescenta as ações de seleção e os demais resultados, preservando a consulta dos dados informados.
 
 O acesso da gestora está limitado às candidaturas de sua escola. O vínculo do candidato é uma autodeclaração para análise da direção; o painel não fornece um catálogo geral de usuários ou profissionais.
 
@@ -98,4 +98,4 @@ Registrar aparelho, dificuldades, ajuda necessária e ajustes propostos. A issue
 
 ## Próxima entrega
 
-O M4 acrescentará encerramento antecipado, seleção manual, resultados das demais candidaturas, desistência do selecionado, cancelamento e encerramento sem seleção. Termos, privacidade e canal de suporte precisam de validação institucional no M5 antes da ativação com dados reais. Detalhes da Hostinger, calendário e capacidade da equipe continuam em aberto.
+O [M4 Seleção e exceções](m4-selecao-excecoes.md) já acrescenta encerramento antecipado, seleção manual, resultados das demais candidaturas, desistência do selecionado, cancelamento e encerramento sem seleção. Termos, privacidade e canal de suporte precisam de validação institucional no M5 antes da ativação com dados reais. Detalhes da Hostinger, calendário e capacidade da equipe continuam em aberto.

@@ -4,7 +4,7 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** M1 concluído localmente e implementações técnicas de M2 e M3 entregues. As avaliações da publicação e da consulta com a diretora permanecem pendentes em M2.7 e M3.7. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md) e [M3 Participação](docs/m3-participacao.md) para configuração, verificações e roteiros de avaliação.
+**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M4 entregues. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
 
 Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta-comunidade/issues?q=is%3Aissue) e [milestones](https://github.com/sobucki/conecta-comunidade/milestones?state=all).
 
@@ -16,7 +16,7 @@ Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta
 | [M1 Base e acessos](https://github.com/sobucki/conecta-comunidade/milestone/1) | Aplicação local com escola, contas e permissões. | M0 | Concluído localmente |
 | [M2 Publicação e divulgação](https://github.com/sobucki/conecta-comunidade/milestone/2) | Diretora publica; visitante consulta e compartilha. | M1 | Implementado localmente; em avaliação |
 | [M3 Participação](https://github.com/sobucki/conecta-comunidade/milestone/3) | Prestador se cadastra e gerencia suas candidaturas. | M2 | Implementado localmente; em avaliação |
-| [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Planejado |
+| [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Implementado localmente; em avaliação |
 | [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Planejado |
 | [M6 Implantação e ativação](https://github.com/sobucki/conecta-comunidade/milestone/6) | Ambiente de destino verificado e piloto autorizado. | M5, infraestrutura e validação institucional | Pendente |
 | [M7 Avaliação e encerramento](https://github.com/sobucki/conecta-comunidade/milestone/7) | Resultados do experimento e decisão de continuidade. | M6 e período de observação definido | Planejado |
@@ -88,16 +88,18 @@ flowchart TD
 
 **Objetivo:** concluir o fluxo da escola e preservar decisões consistentes e rastreáveis.
 
-- [ ] Implementar encerramento antecipado das inscrições e análise após o prazo. ([#22](https://github.com/sobucki/conecta-comunidade/issues/22))
-- [ ] Implementar seleção manual com confirmação, registrando responsável e data. ([#23](https://github.com/sobucki/conecta-comunidade/issues/23))
-- [ ] Atualizar as demais candidaturas elegíveis para não selecionadas. ([#24](https://github.com/sobucki/conecta-comunidade/issues/24))
-- [ ] Implementar desistência do selecionado e reconsideração de candidatos existentes, mantendo as inscrições fechadas. ([#25](https://github.com/sobucki/conecta-comunidade/issues/25))
-- [ ] Implementar cancelamento e encerramento sem seleção, com justificativa. ([#26](https://github.com/sobucki/conecta-comunidade/issues/26))
-- [ ] Manter links antigos acessíveis com a situação atual e sem exposição de candidatos. ([#27](https://github.com/sobucki/conecta-comunidade/issues/27))
-- [ ] Testar seleções concorrentes, consistência das operações e histórico. ([#28](https://github.com/sobucki/conecta-comunidade/issues/28))
+- [x] Implementar encerramento antecipado das inscrições e análise após o prazo. ([#22](https://github.com/sobucki/conecta-comunidade/issues/22))
+- [x] Implementar seleção manual com confirmação, registrando responsável e data. ([#23](https://github.com/sobucki/conecta-comunidade/issues/23))
+- [x] Atualizar as demais candidaturas elegíveis para não selecionadas. ([#24](https://github.com/sobucki/conecta-comunidade/issues/24))
+- [x] Implementar desistência do selecionado e reconsideração de candidatos existentes, mantendo as inscrições fechadas. ([#25](https://github.com/sobucki/conecta-comunidade/issues/25))
+- [x] Implementar cancelamento e encerramento sem seleção, com justificativa. ([#26](https://github.com/sobucki/conecta-comunidade/issues/26))
+- [x] Manter links antigos acessíveis com a situação atual e sem exposição de candidatos. ([#27](https://github.com/sobucki/conecta-comunidade/issues/27))
+- [x] Testar seleções concorrentes, consistência das operações e histórico. ([#28](https://github.com/sobucki/conecta-comunidade/issues/28))
 - [ ] Completar a avaliação do painel da diretora e realizar as adaptações necessárias. ([#29](https://github.com/sobucki/conecta-comunidade/issues/29))
 
 **Demonstração de conclusão:** a diretora seleciona um prestador, registra uma desistência e escolhe outro candidato existente. Somente uma seleção fica vigente. Pelo celular, ela consegue publicar com foto, consultar candidatos e selecionar sem orientação passo a passo; dificuldades identificadas são corrigidas ou atendidas por uma interface própria.
+
+**Verificação atual:** 44 testes de integração e 20 percursos de navegador aprovados, com concorrência, rollback, desistência, reconsideração e privacidade dos links antigos. A implementação técnica está entregue; M4.8 permanece pendente até a avaliação real com a diretora e os ajustes decorrentes. Consulte o [guia do M4](docs/m4-selecao-excecoes.md).
 
 ### M5 Preparação do piloto
 
@@ -161,7 +163,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-As avaliações de **M2.7** e **M3.7** com a diretora permanecem pendentes. O marco técnico seguinte é **M4 Seleção e exceções**, para encerramento, seleção manual e tratamento dos demais resultados.
+As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. O marco técnico seguinte é **M5 Preparação do piloto**, para indicadores, conteúdo, suporte e validação dos percursos. A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
 
 ## 6 Evolução após o MVP
 

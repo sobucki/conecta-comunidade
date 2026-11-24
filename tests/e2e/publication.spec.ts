@@ -304,7 +304,7 @@ test('listagem mostra somente oportunidades abertas no prazo e link antigo conti
   ).toHaveCount(0)
   await page.goto(`/oportunidades/${opportunity.id}`)
   await expect(
-    page.getByText('Inscrições encerradas', { exact: true }),
+    page.getByText('Inscrições encerradas, em análise', { exact: true }),
   ).toBeVisible()
   await expect(
     page.getByRole('heading', { name: opportunity.title }),

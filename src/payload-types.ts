@@ -75,6 +75,7 @@ export interface Config {
     media: Media;
     applications: Application;
     'application-events': ApplicationEvent;
+    'opportunity-events': OpportunityEvent;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     applications: ApplicationsSelect<false> | ApplicationsSelect<true>;
     'application-events': ApplicationEventsSelect<false> | ApplicationEventsSelect<true>;
+    'opportunity-events': OpportunityEventsSelect<false> | OpportunityEventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -237,8 +239,17 @@ export interface Opportunity {
    * Até três fotos em JPG, PNG ou WebP, de até 5 MB cada. Evite pessoas identificáveis.
    */
   photos?: (number | Media)[] | null;
-  status: 'DRAFT' | 'OPEN';
+  status: 'DRAFT' | 'OPEN' | 'UNDER_REVIEW' | 'AWAITING_FORMALIZATION' | 'CLOSED_WITHOUT_SELECTION' | 'CANCELLED';
   publishedAt?: string | null;
+  decisionRevision?: number | null;
+  currentStatus?:
+    ('DRAFT' | 'OPEN' | 'UNDER_REVIEW' | 'AWAITING_FORMALIZATION' | 'CLOSED_WITHOUT_SELECTION' | 'CANCELLED') | null;
+  closedAt?: string | null;
+  selectedAt?: string | null;
+  closedBy?: (number | null) | User;
+  selectedBy?: (number | null) | User;
+  selectedApplication?: (number | null) | Application;
+  resolutionReason?: string | null;
   createdBy?: (number | null) | User;
   publishedBy?: (number | null) | User;
   updatedAt: string;
@@ -293,7 +304,7 @@ export interface Application {
   opportunity: number | Opportunity;
   candidate: number | User;
   school: number | School;
-  status: 'SUBMITTED' | 'WITHDRAWN';
+  status: 'SUBMITTED' | 'WITHDRAWN' | 'SELECTED' | 'NOT_SELECTED' | 'SELECTED_WITHDRAWN' | 'CANCELLED';
   availability: string;
   experience?: string | null;
   profileSnapshot?: {
@@ -317,6 +328,8 @@ export interface Application {
   submittedAt: string;
   withdrawnAt?: string | null;
   revision: number;
+  decisionAt?: string | null;
+  decisionBy?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
 }
@@ -330,7 +343,8 @@ export interface ApplicationEvent {
   school: number | School;
   candidate: number | User;
   actor: number | User;
-  action: 'submit' | 'edit' | 'withdraw' | 'resubmit';
+  action:
+    'submit' | 'edit' | 'withdraw' | 'resubmit' | 'selected' | 'not_selected' | 'selection_withdrawn' | 'cancelled';
   revision: number;
   snapshot:
     | {
@@ -341,6 +355,26 @@ export interface ApplicationEvent {
     | number
     | boolean
     | null;
+  privateReason?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opportunity-events".
+ */
+export interface OpportunityEvent {
+  id: number;
+  opportunity: number | Opportunity;
+  school: number | School;
+  actor: number | User;
+  actorName: string;
+  action: 'close' | 'deadline_closed' | 'select' | 'selected_withdrawal' | 'cancel' | 'close_without_selection';
+  revision: number;
+  previousStatus: string;
+  nextStatus: string;
+  application?: (number | null) | Application;
+  reason?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -399,6 +433,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'application-events';
         value: number | ApplicationEvent;
+      } | null)
+    | ({
+        relationTo: 'opportunity-events';
+        value: number | OpportunityEvent;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -530,6 +568,14 @@ export interface OpportunitiesSelect<T extends boolean = true> {
   photos?: T;
   status?: T;
   publishedAt?: T;
+  decisionRevision?: T;
+  currentStatus?: T;
+  closedAt?: T;
+  selectedAt?: T;
+  closedBy?: T;
+  selectedBy?: T;
+  selectedApplication?: T;
+  resolutionReason?: T;
   createdBy?: T;
   publishedBy?: T;
   updatedAt?: T;
@@ -606,6 +652,8 @@ export interface ApplicationsSelect<T extends boolean = true> {
   submittedAt?: T;
   withdrawnAt?: T;
   revision?: T;
+  decisionAt?: T;
+  decisionBy?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -621,6 +669,25 @@ export interface ApplicationEventsSelect<T extends boolean = true> {
   action?: T;
   revision?: T;
   snapshot?: T;
+  privateReason?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opportunity-events_select".
+ */
+export interface OpportunityEventsSelect<T extends boolean = true> {
+  opportunity?: T;
+  school?: T;
+  actor?: T;
+  actorName?: T;
+  action?: T;
+  revision?: T;
+  previousStatus?: T;
+  nextStatus?: T;
+  application?: T;
+  reason?: T;
   updatedAt?: T;
   createdAt?: T;
 }

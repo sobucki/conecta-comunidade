@@ -11,6 +11,7 @@ import {
   responsibility,
 } from '@/public/data'
 import { ShareLinks } from '@/components/ShareLinks'
+import { opportunityStatusLabel } from '@/selection/status'
 
 export default async function OpportunityPage({
   params,
@@ -58,7 +59,7 @@ export default async function OpportunityPage({
             <span
               className={`status-badge ${accepting ? 'status-open' : 'status-closed'}`}
             >
-              {accepting ? 'Inscrições abertas' : 'Inscrições encerradas'}
+              {opportunityStatusLabel(opportunity)}
             </span>
             <h1>{opportunity.title}</h1>
             <p className="location-line">
@@ -153,8 +154,10 @@ export default async function OpportunityPage({
             </div>
           ) : (
             <div className="participation-note">
-              O prazo desta oportunidade terminou. Confira outras demandas da
-              escola.
+              {opportunityStatusLabel(opportunity)}.{' '}
+              {opportunity.status === 'AWAITING_FORMALIZATION'
+                ? 'A seleção não equivale a contratação.'
+                : 'Confira outras demandas da escola.'}
             </div>
           )}
           <ShareLinks

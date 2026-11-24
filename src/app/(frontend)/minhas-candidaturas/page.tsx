@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { providerSession } from '@/accounts/session'
 import { publicPayload, dateTime } from '@/public/data'
 import { ProviderNavigation } from '@/components/ProviderNavigation'
+import { applicationStatusLabels, applicationResult } from '@/selection/status'
 
 export const metadata = { robots: { index: false, follow: false } }
 
@@ -49,7 +50,7 @@ export default async function MyApplications({
                 <span
                   className={`status-badge ${application.status === 'SUBMITTED' ? 'status-open' : 'status-closed'}`}
                 >
-                  {application.status === 'SUBMITTED' ? 'Enviada' : 'Retirada'}
+                  {applicationStatusLabels[application.status]}
                 </span>
                 <h2>
                   <Link href={`/minhas-candidaturas/${application.id}`}>
@@ -57,6 +58,7 @@ export default async function MyApplications({
                   </Link>
                 </h2>
                 <p>Último envio em {dateTime(application.submittedAt)}</p>
+                <p>{applicationResult(application, opportunity)}</p>
                 <Link
                   className="inline-link"
                   href={`/minhas-candidaturas/${application.id}`}

@@ -2,6 +2,8 @@ import { APIError, type CollectionConfig } from 'payload'
 import { readParticipation } from '../participation/rules'
 import { applicationEndpoint } from '../participation/actions'
 import { communityLinks } from '../accounts/registration-options'
+import { applicationStatusLabels } from '../selection/status'
+import { managementPanel } from '../access'
 
 export const Applications: CollectionConfig = {
   slug: 'applications',
@@ -42,6 +44,15 @@ export const Applications: CollectionConfig = {
   },
   fields: [
     {
+      name: 'selectionControls',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/SelectCandidate#SelectCandidate',
+        },
+      },
+    },
+    {
       name: 'candidateName',
       label: 'Nome do candidato',
       type: 'text',
@@ -79,10 +90,9 @@ export const Applications: CollectionConfig = {
       label: 'Situação',
       type: 'select',
       required: true,
-      options: [
-        { label: 'Enviada', value: 'SUBMITTED' },
-        { label: 'Retirada', value: 'WITHDRAWN' },
-      ],
+      options: Object.entries(applicationStatusLabels).map(
+        ([value, label]) => ({ value, label }),
+      ),
       admin: { readOnly: true },
     },
     {
@@ -168,6 +178,27 @@ export const Applications: CollectionConfig = {
       type: 'number',
       required: true,
       admin: { readOnly: true },
+    },
+    {
+      name: 'decisionAt',
+      label: 'Última decisão em',
+      type: 'date',
+      admin: {
+        readOnly: true,
+        date: {
+          pickerAppearance: 'dayAndTime',
+          displayFormat: 'dd/MM/yyyy HH:mm',
+        },
+      },
+    },
+    {
+      name: 'decisionBy',
+      label: 'Responsável pela decisão',
+      type: 'relationship',
+      relationTo: 'users',
+      maxDepth: 0,
+      admin: { hidden: true },
+      access: { read: managementPanel },
     },
   ],
 }

@@ -230,42 +230,44 @@ export async function seedDevelopment(payload: Payload) {
       },
     })
   ).docs[0]
-  const demoProvider = (
-    await payload.find({
-      collection: 'users',
-      depth: 0,
-      limit: 1,
-      where: { email: { equals: 'prestador@conecta.test' } },
-    })
-  ).docs[0]
-  if (
-    demoOpportunity?.status === 'OPEN' &&
-    Date.parse(demoOpportunity.applicationDeadline) > Date.now() &&
-    demoProvider?.status === 'active' &&
-    demoProvider.role === 'provider'
-  ) {
-    const existingApplication = await payload.count({
-      collection: 'applications',
-      where: {
-        and: [
-          { opportunity: { equals: demoOpportunity.id } },
-          { candidate: { equals: demoProvider.id } },
-        ],
-      },
-    })
-    if (!existingApplication.totalDocs)
-      await changeParticipation(
-        await createLocalReq({ user: demoProvider }, payload),
-        demoOpportunity.id,
-        'submit',
-        {
-          availability: 'Exemplo fictício: terças e quintas pela manhã.',
-          experience:
-            'Candidatura fictícia para demonstrar a consulta da direção.',
-          accepted: true,
-          conditionsToken: conditionsToken(demoOpportunity),
+  for (const email of ['prestador@conecta.test', 'prestadora@conecta.test']) {
+    const demoProvider = (
+      await payload.find({
+        collection: 'users',
+        depth: 0,
+        limit: 1,
+        where: { email: { equals: email } },
+      })
+    ).docs[0]
+    if (
+      demoOpportunity?.status === 'OPEN' &&
+      Date.parse(demoOpportunity.applicationDeadline) > Date.now() &&
+      demoProvider?.status === 'active' &&
+      demoProvider.role === 'provider'
+    ) {
+      const existingApplication = await payload.count({
+        collection: 'applications',
+        where: {
+          and: [
+            { opportunity: { equals: demoOpportunity.id } },
+            { candidate: { equals: demoProvider.id } },
+          ],
         },
-      )
+      })
+      if (!existingApplication.totalDocs)
+        await changeParticipation(
+          await createLocalReq({ user: demoProvider }, payload),
+          demoOpportunity.id,
+          'submit',
+          {
+            availability: 'Exemplo fictício: terças e quintas pela manhã.',
+            experience:
+              'Candidatura fictícia para demonstrar a consulta da direção.',
+            accepted: true,
+            conditionsToken: conditionsToken(demoOpportunity),
+          },
+        )
+    }
   }
   return school
 }
