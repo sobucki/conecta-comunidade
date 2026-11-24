@@ -9,7 +9,7 @@ O [roadmap de desenvolvimento](conecta-comunidade-roadmap.md) organiza os marcos
 | Informação | Definição |
 | --- | --- |
 | Data da consolidação | 23/11/2026 |
-| Situação | M1 e implementações técnicas de M2 a M4 verificados localmente; avaliações de publicação, consulta e seleção com a diretora pendentes |
+| Situação | M1 e implementações técnicas de M2 a M5 verificadas localmente; preparação institucional de M5 pendente; avaliações de publicação, consulta e seleção com a diretora pendentes |
 | Público do piloto | Uma escola e participantes adultos de sua comunidade |
 | Primeira entrega do produto | Fluxo até a seleção, aguardando formalização externa |
 | Prazo e disponibilidade da equipe | Em aberto |

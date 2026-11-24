@@ -40,6 +40,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
               <Link href="/recuperar-acesso">Recuperar acesso</Link>
               <Link href="/termos">Termos de participação</Link>
               <Link href="/privacidade">Privacidade</Link>
+              <Link href="/suporte">Suporte e privacidade</Link>
               <Link href="/admin">Área da gestão</Link>
             </nav>
             <span className="pilot-note">Projeto piloto escolar</span>

@@ -16,6 +16,8 @@ import { SiteContent } from './globals/SiteContent'
 import { Applications } from './collections/Applications'
 import { ApplicationEvents } from './collections/ApplicationEvents'
 import { OpportunityEvents } from './collections/OpportunityEvents'
+import { PilotDashboard } from './globals/PilotDashboard'
+import { metricsEndpoint } from './pilot/metrics'
 import sharp from 'sharp'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -47,7 +49,10 @@ export default buildConfig({
     ApplicationEvents,
     OpportunityEvents,
   ],
-  globals: [SiteContent],
+  globals: [SiteContent, PilotDashboard],
+  endpoints: [
+    { path: '/pilot-metrics', method: 'get', handler: metricsEndpoint },
+  ],
   sharp,
   upload: {
     limits: { fileSize: 5 * 1024 * 1024 },

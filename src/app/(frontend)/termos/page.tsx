@@ -1,4 +1,15 @@
-export default function Terms() {
+import { siteContent } from '@/public/data'
+import Link from 'next/link'
+export default async function Terms() {
+  const content = await siteContent()
+  if (content.contentApprovedAt && content.institutionalTerms)
+    return (
+      <main id="conteudo" className="container account-page">
+        <h1>Termos de participação</h1>
+        <p className="preserve-lines">{content.institutionalTerms}</p>
+        <Link href="/suporte">Suporte e privacidade</Link>
+      </main>
+    )
   return (
     <main id="conteudo" className="container account-page">
       <h1>Termos de participação</h1>

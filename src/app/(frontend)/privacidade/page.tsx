@@ -1,4 +1,15 @@
-export default function Privacy() {
+import { siteContent } from '@/public/data'
+import Link from 'next/link'
+export default async function Privacy() {
+  const content = await siteContent()
+  if (content.contentApprovedAt && content.institutionalPrivacy)
+    return (
+      <main id="conteudo" className="container account-page">
+        <h1>Aviso de privacidade</h1>
+        <p className="preserve-lines">{content.institutionalPrivacy}</p>
+        <Link href="/suporte">Suporte e privacidade</Link>
+      </main>
+    )
   return (
     <main id="conteudo" className="container account-page">
       <h1>Aviso de privacidade</h1>

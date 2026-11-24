@@ -103,9 +103,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'site-content': SiteContent;
+    'pilot-dashboard': PilotDashboard;
   };
   globalsSelect: {
     'site-content': SiteContentSelect<false> | SiteContentSelect<true>;
+    'pilot-dashboard': PilotDashboardSelect<false> | PilotDashboardSelect<true>;
   };
   locale: null;
   widgets: {
@@ -737,6 +739,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteContent {
   id: number;
+  supportName?: string | null;
+  supportEmail?: string | null;
+  institutionalTerms?: string | null;
+  institutionalPrivacy?: string | null;
+  /**
+   * Preencher apenas após validação real dos termos e aviso pelo responsável institucional.
+   */
+  contentApprovedAt?: string | null;
   projectName: string;
   headline: string;
   introduction: string;
@@ -748,15 +758,38 @@ export interface SiteContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pilot-dashboard".
+ */
+export interface PilotDashboard {
+  id: number;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-content_select".
  */
 export interface SiteContentSelect<T extends boolean = true> {
+  supportName?: T;
+  supportEmail?: T;
+  institutionalTerms?: T;
+  institutionalPrivacy?: T;
+  contentApprovedAt?: T;
   projectName?: T;
   headline?: T;
   introduction?: T;
   about?: T;
   school?: T;
   coverImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pilot-dashboard_select".
+ */
+export interface PilotDashboardSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

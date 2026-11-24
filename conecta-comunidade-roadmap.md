@@ -4,7 +4,7 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M4 entregues. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
+**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M5 entregues; M5 mantém validações institucionais pendentes. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
 
 Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta-comunidade/issues?q=is%3Aissue) e [milestones](https://github.com/sobucki/conecta-comunidade/milestones?state=all).
 
@@ -17,7 +17,7 @@ Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta
 | [M2 Publicação e divulgação](https://github.com/sobucki/conecta-comunidade/milestone/2) | Diretora publica; visitante consulta e compartilha. | M1 | Implementado localmente; em avaliação |
 | [M3 Participação](https://github.com/sobucki/conecta-comunidade/milestone/3) | Prestador se cadastra e gerencia suas candidaturas. | M2 | Implementado localmente; em avaliação |
 | [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Implementado localmente; em avaliação |
-| [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Planejado |
+| [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Implementado localmente; validações pendentes |
 | [M6 Implantação e ativação](https://github.com/sobucki/conecta-comunidade/milestone/6) | Ambiente de destino verificado e piloto autorizado. | M5, infraestrutura e validação institucional | Pendente |
 | [M7 Avaliação e encerramento](https://github.com/sobucki/conecta-comunidade/milestone/7) | Resultados do experimento e decisão de continuidade. | M6 e período de observação definido | Planejado |
 
@@ -105,13 +105,13 @@ flowchart TD
 
 **Objetivo:** concluir o produto para avaliação no ambiente de destino e uso autorizado.
 
-- [ ] Implementar os seis indicadores agregados acordados, com consulta por período. ([#30](https://github.com/sobucki/conecta-comunidade/issues/30))
-- [ ] Definir e verificar a contagem de reenvios, os intervalos de observação e os denominadores dos indicadores. ([#31](https://github.com/sobucki/conecta-comunidade/issues/31))
+- [x] Implementar os seis indicadores agregados acordados, com consulta por período. ([#30](https://github.com/sobucki/conecta-comunidade/issues/30))
+- [x] Definir e verificar a contagem de reenvios, os intervalos de observação e os denominadores dos indicadores. ([#31](https://github.com/sobucki/conecta-comunidade/issues/31))
 - [ ] Completar os textos institucionais, termos e aviso de privacidade com a validação responsável. ([#32](https://github.com/sobucki/conecta-comunidade/issues/32))
 - [ ] Informar o canal externo de suporte e definir o responsável por atendimento e administração. ([#33](https://github.com/sobucki/conecta-comunidade/issues/33))
 - [ ] Executar os percursos completos de visitante, prestador e diretora pelo celular. ([#34](https://github.com/sobucki/conecta-comunidade/issues/34))
 - [ ] Corrigir problemas encontrados nos testes de permissões, candidaturas, seleção, uploads e usabilidade. ([#35](https://github.com/sobucki/conecta-comunidade/issues/35))
-- [ ] Preparar as instruções de operação e a relação de pendências para implantação. ([#36](https://github.com/sobucki/conecta-comunidade/issues/36))
+- [x] Preparar as instruções de operação e a relação de pendências para implantação. ([#36](https://github.com/sobucki/conecta-comunidade/issues/36))
 
 **Demonstração de conclusão:** o fluxo completo funciona com dados fictícios, os indicadores conferem com os registros e as pendências para M6 estão identificadas. A conclusão da preparação do produto não autoriza, por si só, a entrada de dados reais.
 
@@ -163,7 +163,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. O marco técnico seguinte é **M5 Preparação do piloto**, para indicadores, conteúdo, suporte e validação dos percursos. A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
+As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. A preparação técnica de **M5** está entregue. Permanecem a validação institucional dos textos e retenção e a definição nominal do responsável; o e-mail de suporte informado foi configurado localmente. O próximo marco é **M6 Implantação e ativação**, condicionado à infraestrutura e às validações pendentes. Consulte o [guia do M5](docs/m5-preparacao-piloto.md). A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
 
 ## 6 Evolução após o MVP
 

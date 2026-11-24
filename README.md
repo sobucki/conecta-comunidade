@@ -56,3 +56,7 @@ Os testes verificam permissões reais, isolamento por escola, proteção de camp
 - [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md): páginas públicas, oportunidades, fotos, compartilhamento e roteiro de avaliação com a diretora.
 - [M3 Participação](docs/m3-participacao.md): cadastro, perfil, candidaturas, histórico, concorrência e consulta identificada pela diretora.
 - [M4 Seleção e exceções](docs/m4-selecao-excecoes.md): encerramento, seleção, desistência, reconsideração, privacidade e avaliação do painel.
+
+## Preparação do piloto
+
+O M5 acrescenta os indicadores em `/admin/globals/pilot-dashboard` e configuração institucional em Conteúdo do site. O canal de suporte informado é `sobucki@gmail.com`, configurado no banco local. Responsável nominal, termos, privacidade, retenção e avaliação real com a diretora continuam pendentes. Consulte [M5 Preparação do piloto](docs/m5-preparacao-piloto.md) para operação, convenções de contagem e pendências para M6.

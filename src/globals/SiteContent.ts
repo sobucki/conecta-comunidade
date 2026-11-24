@@ -22,6 +22,38 @@ export const SiteContent: GlobalConfig = {
   },
   fields: [
     {
+      name: 'supportName',
+      label: 'Responsável pelo atendimento',
+      type: 'text',
+      maxLength: 120,
+    },
+    {
+      name: 'supportEmail',
+      label: 'E-mail externo de suporte e privacidade',
+      type: 'email',
+    },
+    {
+      name: 'institutionalTerms',
+      label: 'Termos validados pela instituição',
+      type: 'textarea',
+      maxLength: 20000,
+    },
+    {
+      name: 'institutionalPrivacy',
+      label: 'Aviso de privacidade validado pela instituição',
+      type: 'textarea',
+      maxLength: 20000,
+    },
+    {
+      name: 'contentApprovedAt',
+      label: 'Data da validação institucional',
+      type: 'date',
+      admin: {
+        description:
+          'Preencher apenas após validação real dos termos e aviso pelo responsável institucional.',
+      },
+    },
+    {
       name: 'projectName',
       label: 'Nome do projeto',
       type: 'text',
