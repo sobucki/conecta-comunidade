@@ -300,6 +300,12 @@ describe('Contas e isolamento por escola', () => {
       collection: 'users',
       where: { email: { contains: '@conecta.test' } },
     })
+    const applicationsBefore = await payload.count({
+      collection: 'applications',
+    })
+    const historyBefore = await payload.count({
+      collection: 'application-events',
+    })
     await seedDevelopment(payload)
     const after = await payload.count({
       collection: 'users',
@@ -307,6 +313,12 @@ describe('Contas e isolamento por escola', () => {
     })
     expect(before.totalDocs).toBe(4)
     expect(after.totalDocs).toBe(before.totalDocs)
+    expect(
+      (await payload.count({ collection: 'applications' })).totalDocs,
+    ).toBe(applicationsBefore.totalDocs)
+    expect(
+      (await payload.count({ collection: 'application-events' })).totalDocs,
+    ).toBe(historyBefore.totalDocs)
   })
 })
 

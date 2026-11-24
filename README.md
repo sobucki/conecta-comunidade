@@ -4,7 +4,7 @@ Aplicação web para conectar demandas de pequenos reparos de uma escola a prest
 
 ## Desenvolvimento local
 
-O M1 implementa a base de Next.js, TypeScript, Payload e PostgreSQL, com contas fictícias, permissões por papel e escola, bloqueio de acessos, histórico administrativo e recuperação de senha por e-mail local. O M2 acrescenta oportunidades com valor fixo e até três fotos, páginas públicas, conteúdo institucional editável e compartilhamento de links.
+O M1 implementa a base de Next.js, TypeScript, Payload e PostgreSQL, com contas fictícias, permissões por papel e escola, bloqueio de acessos, histórico administrativo e recuperação de senha por e-mail local. O M2 acrescenta oportunidades com valor fixo e até três fotos, páginas públicas, conteúdo institucional editável e compartilhamento de links. O M3 completa cadastro público, login, perfil e candidaturas, com edição, retirada, reenvio, histórico e consulta restrita da direção.
 
 Requisitos: Node.js na versão indicada em [.node-version](.node-version), npm e Docker com Compose em execução.
 
@@ -22,9 +22,11 @@ npm run dev
 
 O comando `dev:setup` gera `.env` com segredos locais aleatórios e preserva um arquivo existente. As contas fictícias são `admin@conecta.test`, `diretora@conecta.test`, `prestador@conecta.test` e `prestadora@conecta.test`. A senha inicial está em `DEMO_PASSWORD` no seu `.env`. O seed é idempotente e não redefine senhas ou alterações de contas existentes.
 
-O banco de desenvolvimento é `conecta_dev`; os testes usam exclusivamente `conecta_test`. Ambos são locais. O Mailpit captura os e-mails, permitindo exercitar a recuperação de acesso sem entrega a destinatários externos. O cadastro público de prestadores será implementado no M3; atualmente, as contas são criadas pelo administrador. O seed também prepara três oportunidades fictícias para consultar em [Escola Demonstração](http://localhost:3000/escolas/escola-demonstracao).
+O banco de desenvolvimento é `conecta_dev`; os testes usam exclusivamente `conecta_test`. Ambos são locais. O Mailpit captura os e-mails, permitindo exercitar a recuperação de acesso sem entrega a destinatários externos. Prestadores podem se cadastrar pelo site e se candidatar sem confirmar o e-mail. O seed prepara três oportunidades fictícias em [Escola Demonstração](http://localhost:3000/escolas/escola-demonstracao) e uma candidatura de exemplo no reparo do muro, quando aberto e dentro do prazo.
 
 Para publicar, a gestora abre Oportunidades no painel, preenche as condições, salva o rascunho, adiciona até três fotos e confirma Publicar oportunidade. A rotina e o roteiro de avaliação estão em [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md).
+
+Para participar, abra uma oportunidade e use Quero me candidatar. O cadastro ou login retorna à oportunidade; depois do envio, Minhas candidaturas permite editar, retirar e reenviar enquanto as inscrições estiverem abertas. Na oportunidade do painel, Consultar candidatos apresenta os dados autorizados à diretora. O percurso completo e o roteiro de avaliação estão em [M3 Participação](docs/m3-participacao.md).
 
 ### Verificações
 
@@ -39,7 +41,7 @@ npm run build
 
 `npm test` executa integração e navegador em sequência. O Playwright inicia e encerra sua própria aplicação na porta 3100, utilizando `.next-test` e o banco de testes. O desenvolvimento na porta 3000 usa `.next` e seu próprio banco.
 
-Os testes verificam permissões reais, isolamento por escola, proteção de campos administrativos, bloqueio de sessões existentes, seed idempotente e recuperação de senha completa via SMTP e navegador. Instruções adicionais e os limites atuais estão em [M1 Base e acessos](docs/m1-base-acessos.md).
+Os testes verificam permissões reais, isolamento por escola, proteção de campos administrativos, bloqueio de sessões existentes, seed idempotente, recuperação de senha via SMTP, publicação e candidaturas. As garantias de participação incluem unicidade sob concorrência, histórico transacional e proteção das condições após a primeira candidatura.
 
 ## Documentação
 
@@ -48,3 +50,4 @@ Os testes verificam permissões reais, isolamento por escola, proteção de camp
 - [Roadmap de desenvolvimento](conecta-comunidade-roadmap.md): sequência dos marcos, tarefas, dependências e critérios de conclusão.
 - [M1 Base e acessos](docs/m1-base-acessos.md): configuração local, modelo inicial, permissões, migração e verificações realizadas.
 - [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md): páginas públicas, oportunidades, fotos, compartilhamento e roteiro de avaliação com a diretora.
+- [M3 Participação](docs/m3-participacao.md): cadastro, perfil, candidaturas, histórico, concorrência e consulta identificada pela diretora.

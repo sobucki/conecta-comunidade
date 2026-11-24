@@ -50,7 +50,7 @@ Os arquivos são armazenados em `media/`, fora de `public/`, com acesso pela API
 
 As respostas de arquivo usam `Cache-Control: private, no-store`, e o otimizador de imagens do Next está desabilitado para evitar outra rota de cache desses arquivos. A hospedagem futura deve preservar o diretório e continuar servindo as fotos pela API autorizada, sem expô-lo por uma rota estática paralela.
 
-Despublicação, cancelamento e seleção serão tratados nos marcos correspondentes. No M2, as ações disponíveis são criação, edição, salvamento de rascunho e publicação. As candidaturas pertencem ao M3; a página informa que esse recurso estará disponível em breve.
+Despublicação, cancelamento e seleção serão tratados nos marcos correspondentes. O M2 entrega criação, edição, salvamento de rascunho e publicação. O [M3 Participação](m3-participacao.md) já acrescenta o botão de candidatura ao site e protege as condições após a primeira participação.
 
 ## Verificações técnicas
 

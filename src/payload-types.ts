@@ -73,6 +73,8 @@ export interface Config {
     'activity-logs': ActivityLog;
     opportunities: Opportunity;
     media: Media;
+    applications: Application;
+    'application-events': ApplicationEvent;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +88,8 @@ export interface Config {
     'activity-logs': ActivityLogsSelect<false> | ActivityLogsSelect<true>;
     opportunities: OpportunitiesSelect<false> | OpportunitiesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    applications: ApplicationsSelect<false> | ApplicationsSelect<true>;
+    'application-events': ApplicationEventsSelect<false> | ApplicationEventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -226,6 +230,10 @@ export interface Opportunity {
   requirements?: string | null;
   notes?: string | null;
   /**
+   * Para corrigir erros de escrita sem mudar o escopo, valor ou condições aceitas. Mudanças nas condições exigem cancelamento e nova publicação.
+   */
+  clarification?: string | null;
+  /**
    * Até três fotos em JPG, PNG ou WebP, de até 5 MB cada. Evite pessoas identificáveis.
    */
   photos?: (number | Media)[] | null;
@@ -277,6 +285,67 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applications".
+ */
+export interface Application {
+  id: number;
+  candidateName: string;
+  opportunity: number | Opportunity;
+  candidate: number | User;
+  school: number | School;
+  status: 'SUBMITTED' | 'WITHDRAWN';
+  availability: string;
+  experience?: string | null;
+  profileSnapshot?: {
+    email?: string | null;
+    phone?: string | null;
+    communityLink?: ('guardian' | 'relative' | 'friend' | 'former-student' | 'local' | 'other') | null;
+    skills?: string | null;
+    professionalSummary?: string | null;
+  };
+  acceptedConditions:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  acceptedAt: string;
+  firstSubmittedAt: string;
+  submittedAt: string;
+  withdrawnAt?: string | null;
+  revision: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "application-events".
+ */
+export interface ApplicationEvent {
+  id: number;
+  application: number | Application;
+  school: number | School;
+  candidate: number | User;
+  actor: number | User;
+  action: 'submit' | 'edit' | 'withdraw' | 'resubmit';
+  revision: number;
+  snapshot:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -322,6 +391,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'applications';
+        value: number | Application;
+      } | null)
+    | ({
+        relationTo: 'application-events';
+        value: number | ApplicationEvent;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -449,6 +526,7 @@ export interface OpportunitiesSelect<T extends boolean = true> {
   toolsResponsibility?: T;
   requirements?: T;
   notes?: T;
+  clarification?: T;
   photos?: T;
   status?: T;
   publishedAt?: T;
@@ -500,6 +578,51 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applications_select".
+ */
+export interface ApplicationsSelect<T extends boolean = true> {
+  candidateName?: T;
+  opportunity?: T;
+  candidate?: T;
+  school?: T;
+  status?: T;
+  availability?: T;
+  experience?: T;
+  profileSnapshot?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        communityLink?: T;
+        skills?: T;
+        professionalSummary?: T;
+      };
+  acceptedConditions?: T;
+  acceptedAt?: T;
+  firstSubmittedAt?: T;
+  submittedAt?: T;
+  withdrawnAt?: T;
+  revision?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "application-events_select".
+ */
+export interface ApplicationEventsSelect<T extends boolean = true> {
+  application?: T;
+  school?: T;
+  candidate?: T;
+  actor?: T;
+  action?: T;
+  revision?: T;
+  snapshot?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

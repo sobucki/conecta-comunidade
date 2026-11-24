@@ -6,6 +6,9 @@ import {
 } from 'payload'
 import { managementPanel } from '../access'
 import { auditChange } from '../hooks/audit'
+import { lockOpportunityUpdate } from '../opportunities/transaction'
+import { conditionFields, conditionValue } from '../participation/rules'
+import { applyEndpoint, conditionsEndpoint } from '../participation/actions'
 import {
   assignedSchool,
   manageSchoolRecords,
@@ -45,6 +48,27 @@ const validateOpportunity: CollectionBeforeValidateHook = async ({
     ? req.user?.id
     : (originalDoc?.publishedBy ?? null)
   const values = { ...originalDoc, ...data }
+  if (operation === 'update') {
+    const existing = await req.payload.count({
+      collection: 'applications',
+      req,
+      overrideAccess: true,
+      where: { opportunity: { equals: originalDoc!.id } },
+    })
+    if (
+      existing.totalDocs &&
+      conditionFields.some(
+        (key) =>
+          key in data &&
+          JSON.stringify(conditionValue(key, data[key])) !==
+            JSON.stringify(conditionValue(key, originalDoc![key])),
+      )
+    )
+      throw new APIError(
+        'Esta oportunidade já recebeu candidatura. As condições estão protegidas, inclusive após retirada. Use o campo de correções de escrita; mudanças de condições exigem cancelamento e nova publicação.',
+        409,
+      )
+  }
   const start = Date.parse(values.executionStart)
   const end = Date.parse(values.executionEnd)
   const deadline = Date.parse(values.applicationDeadline)
@@ -91,6 +115,7 @@ async function publish(req: PayloadRequest) {
 
 export const Opportunities: CollectionConfig = {
   slug: 'opportunities',
+  disableBulkEdit: true,
   labels: { singular: 'Oportunidade', plural: 'Oportunidades' },
   admin: {
     useAsTitle: 'title',
@@ -109,8 +134,16 @@ export const Opportunities: CollectionConfig = {
     update: manageSchoolRecords,
     delete: () => false,
   },
-  endpoints: [{ path: '/:id/publish', method: 'post', handler: publish }],
-  hooks: { beforeValidate: [validateOpportunity], afterChange: [auditChange] },
+  endpoints: [
+    { path: '/:id/publish', method: 'post', handler: publish },
+    { path: '/:id/apply', method: 'post', handler: applyEndpoint },
+    { path: '/:id/conditions', method: 'get', handler: conditionsEndpoint },
+  ],
+  hooks: {
+    beforeOperation: [lockOpportunityUpdate],
+    beforeValidate: [validateOpportunity],
+    afterChange: [auditChange],
+  },
   fields: [
     {
       name: 'title',
@@ -240,6 +273,16 @@ export const Opportunities: CollectionConfig = {
       type: 'textarea',
     },
     { name: 'notes', label: 'Outras condições', type: 'textarea' },
+    {
+      name: 'clarification',
+      label: 'Correções de escrita',
+      type: 'textarea',
+      maxLength: 1500,
+      admin: {
+        description:
+          'Para corrigir erros de escrita sem mudar o escopo, valor ou condições aceitas. Mudanças nas condições exigem cancelamento e nova publicação.',
+      },
+    },
     {
       name: 'photos',
       label: 'Fotos do reparo',

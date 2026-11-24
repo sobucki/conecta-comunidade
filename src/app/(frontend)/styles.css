@@ -26,7 +26,9 @@ a {
 }
 a,
 button,
-input {
+input,
+select,
+textarea {
   -webkit-tap-highlight-color: transparent;
 }
 a:focus-visible,
@@ -36,7 +38,9 @@ input:focus-visible {
   outline-offset: 4px;
 }
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 button {
@@ -622,6 +626,191 @@ dd {
   padding: 0.9rem;
   margin-bottom: 0.75rem;
   background: white;
+}
+.account-page select,
+.account-page textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #728f7c;
+  border-radius: 6px;
+  padding: 0.9rem;
+  background: white;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.account-page select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23205943' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+.account-page textarea {
+  resize: vertical;
+}
+.account-page .check-label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+  margin-block: 0.5rem;
+}
+.account-page .check-label input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin-top: 0.2rem;
+  accent-color: var(--green);
+}
+.account-page fieldset {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-block: 0.5rem 1rem;
+}
+.account-page legend {
+  font-weight: 600;
+}
+.field-help {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.provider-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.875rem;
+}
+.account-page .text-button,
+.text-button {
+  background: transparent;
+  border: 0;
+  color: var(--green);
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding: 0;
+  font-weight: 500;
+}
+.participation-page {
+  padding-block: 3rem 5rem;
+}
+.participation-page h1 {
+  overflow-wrap: anywhere;
+}
+.participation-page h2 {
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+}
+.participation-callout .button {
+  width: 100%;
+}
+.participation-callout .field-help {
+  margin-top: 0.75rem;
+}
+.accepted-conditions {
+  margin-block: 2rem;
+  border: 1px solid var(--line);
+  background: #f5f8f5;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.accepted-conditions h2 {
+  margin-top: 0;
+}
+.conditions-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.accepted-conditions summary,
+.application-history summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.accepted-conditions details p {
+  margin-top: 1rem;
+}
+.application-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.application-card {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.application-card h2 {
+  margin-block: 1rem;
+  overflow-wrap: anywhere;
+}
+.application-card .status-badge {
+  margin: 0;
+}
+.application-card p {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.application-status {
+  margin-block: 1.5rem;
+  padding: 1rem;
+  background: var(--light);
+  border-radius: 6px;
+}
+.account-page .withdraw-button {
+  color: #81392b;
+  background: white;
+  border: 1px solid #b89b95;
+  margin-top: 1rem;
+}
+.application-history {
+  margin-top: 3rem;
+  border-top: 1px solid var(--line);
+}
+.application-history ol {
+  list-style: none;
+  padding: 0;
+}
+.application-history li {
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.application-history li > span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-block: 0.5rem;
+}
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #b67505;
+  outline-offset: 4px;
+}
+@media (max-width: 640px) {
+  .site-header nav {
+    flex-wrap: wrap;
+  }
+  .conditions-list,
+  .application-list {
+    grid-template-columns: 1fr;
+  }
+  .participation-page {
+    padding-block: 2rem 3rem;
+  }
 }
 .account-page label {
   font-weight: 600;

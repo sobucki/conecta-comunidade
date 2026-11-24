@@ -63,6 +63,11 @@ export function PublishOpportunity() {
           Ver página pública
         </a>
       )}
+      <a
+        href={`/admin/collections/applications?where[opportunity][equals]=${id}`}
+      >
+        Consultar candidatos
+      </a>
       <span role="status">
         {modified ? 'Salve as alterações antes de publicar.' : message}
       </span>

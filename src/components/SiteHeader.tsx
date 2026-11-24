@@ -3,9 +3,11 @@ import Link from 'next/link'
 export function SiteHeader({
   name,
   schoolSlug,
+  signedIn,
 }: {
   name: string
   schoolSlug?: string
+  signedIn?: boolean
 }) {
   return (
     <header className="site-header">
@@ -21,6 +23,9 @@ export function SiteHeader({
             <Link href={`/escolas/${schoolSlug}`}>Oportunidades</Link>
           )}
           <Link href="/#sobre">Sobre o projeto</Link>
+          <Link href={signedIn ? '/minhas-candidaturas' : '/entrar'}>
+            {signedIn ? 'Minhas candidaturas' : 'Entrar'}
+          </Link>
           <Link href="/admin" className="management-link">
             Área da gestão
           </Link>

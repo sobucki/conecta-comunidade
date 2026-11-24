@@ -12,6 +12,8 @@ import { ActivityLogs } from './collections/ActivityLogs'
 import { Opportunities } from './collections/Opportunities'
 import { Media } from './collections/Media'
 import { SiteContent } from './globals/SiteContent'
+import { Applications } from './collections/Applications'
+import { ApplicationEvents } from './collections/ApplicationEvents'
 import sharp from 'sharp'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -32,7 +34,16 @@ export default buildConfig({
     meta: { titleSuffix: ' | Conecta Comunidade' },
   },
   i18n: { fallbackLanguage: 'pt', supportedLanguages: { pt } },
-  collections: [Users, Schools, Categories, ActivityLogs, Opportunities, Media],
+  collections: [
+    Users,
+    Schools,
+    Categories,
+    ActivityLogs,
+    Opportunities,
+    Media,
+    Applications,
+    ApplicationEvents,
+  ],
   globals: [SiteContent],
   sharp,
   upload: {

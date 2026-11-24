@@ -108,6 +108,12 @@ export default async function OpportunityPage({
               <p className="preserve-lines">{opportunity.notes}</p>
             </section>
           )}
+          {opportunity.clarification && (
+            <section className="detail-section">
+              <h2>Correções de escrita</h2>
+              <p className="preserve-lines">{opportunity.clarification}</p>
+            </section>
+          )}
         </article>
         <aside className="conditions-card">
           <p className="eyebrow">Valor oferecido pelo serviço</p>
@@ -133,11 +139,24 @@ export default async function OpportunityPage({
               </dd>
             </div>
           </dl>
-          <div className="participation-note">
-            {accepting
-              ? 'As candidaturas pelo site estarão disponíveis em breve. Compartilhe esta oportunidade com a comunidade.'
-              : 'O prazo desta oportunidade terminou. Confira outras demandas da escola.'}
-          </div>
+          {accepting ? (
+            <div className="participation-callout">
+              <Link
+                className="button button-primary"
+                href={`/oportunidades/${opportunity.id}/candidatar`}
+              >
+                Quero me candidatar
+              </Link>
+              <p className="field-help">
+                Entre ou crie sua conta para informar sua disponibilidade.
+              </p>
+            </div>
+          ) : (
+            <div className="participation-note">
+              O prazo desta oportunidade terminou. Confira outras demandas da
+              escola.
+            </div>
+          )}
           <ShareLinks
             path={`/oportunidades/${opportunity.id}`}
             title={`${opportunity.title} — ${school?.name || 'Conecta Comunidade'}`}

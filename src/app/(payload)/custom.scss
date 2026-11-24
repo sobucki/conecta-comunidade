@@ -1,0 +1,37 @@
+.collection-edit--applications {
+  input:disabled,
+  textarea:disabled {
+    color: var(--theme-text);
+    -webkit-text-fill-color: var(--theme-text);
+    opacity: 1;
+  }
+  h1 {
+    overflow-wrap: anywhere;
+  }
+}
+
+// Mantém as datas e os controles da consulta legíveis sem rolagem lateral.
+@media (max-width: 640px) {
+  .collection-edit--applications {
+    .doc-controls__meta {
+      flex-wrap: wrap;
+      width: 100%;
+      padding-block: 0.5rem;
+    }
+    .doc-controls__meta::after {
+      display: none;
+    }
+    .doc-controls__list-item {
+      flex-wrap: wrap;
+    }
+  }
+  .app-header__account {
+    flex-shrink: 0;
+  }
+  .app-header__step-nav-wrapper {
+    min-width: 0;
+  }
+  .app-header__wrapper {
+    min-width: 0;
+  }
+}

@@ -1,4 +1,6 @@
-import type { Payload } from 'payload'
+import { createLocalReq, type Payload } from 'payload'
+import { changeParticipation } from '../participation/actions'
+import { conditionsToken } from '../participation/rules'
 
 export function assertDevelopmentDatabase(databaseURL: string | undefined) {
   if (
@@ -214,6 +216,56 @@ export async function seedDevelopment(payload: Payload) {
       context: { publishingOpportunity: true },
       data: { status: 'OPEN' },
     })
+  }
+  const demoOpportunity = (
+    await payload.find({
+      collection: 'opportunities',
+      depth: 0,
+      limit: 1,
+      where: {
+        and: [
+          { school: { equals: school.id } },
+          { title: { equals: 'Pintura do muro de entrada' } },
+        ],
+      },
+    })
+  ).docs[0]
+  const demoProvider = (
+    await payload.find({
+      collection: 'users',
+      depth: 0,
+      limit: 1,
+      where: { email: { equals: 'prestador@conecta.test' } },
+    })
+  ).docs[0]
+  if (
+    demoOpportunity?.status === 'OPEN' &&
+    Date.parse(demoOpportunity.applicationDeadline) > Date.now() &&
+    demoProvider?.status === 'active' &&
+    demoProvider.role === 'provider'
+  ) {
+    const existingApplication = await payload.count({
+      collection: 'applications',
+      where: {
+        and: [
+          { opportunity: { equals: demoOpportunity.id } },
+          { candidate: { equals: demoProvider.id } },
+        ],
+      },
+    })
+    if (!existingApplication.totalDocs)
+      await changeParticipation(
+        await createLocalReq({ user: demoProvider }, payload),
+        demoOpportunity.id,
+        'submit',
+        {
+          availability: 'Exemplo fictício: terças e quintas pela manhã.',
+          experience:
+            'Candidatura fictícia para demonstrar a consulta da direção.',
+          accepted: true,
+          conditionsToken: conditionsToken(demoOpportunity),
+        },
+      )
   }
   return school
 }

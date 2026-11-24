@@ -13,6 +13,8 @@ import {
   ownAccountOrAdmin,
 } from '../access'
 import { auditChange } from '../hooks/audit'
+import { registrationEndpoint } from '../accounts/registration'
+import { communityLinks } from '../accounts/registration-options'
 
 const validateAccount: CollectionBeforeValidateHook = ({
   data,
@@ -24,16 +26,22 @@ const validateAccount: CollectionBeforeValidateHook = ({
   if (
     operation === 'create' &&
     !isAdministrator(req.user) &&
-    !req.context.bootstrap
+    !req.context.bootstrap &&
+    !req.context.publicRegistration
   ) {
     throw new APIError(
-      'O cadastro de contas é administrado pela escola nesta etapa.',
+      'Use o cadastro de prestador ou a administração de contas.',
       403,
     )
   }
   const account = { ...originalDoc, ...data }
   account.role ??= 'provider'
-  if (originalDoc && !isAdministrator(req.user) && !req.context.bootstrap) {
+  if (
+    operation === 'update' &&
+    originalDoc &&
+    !isAdministrator(req.user) &&
+    !req.context.bootstrap
+  ) {
     account.role = originalDoc.role
     account.school = originalDoc.school
     account.status = originalDoc.status
@@ -99,6 +107,9 @@ export const Users: CollectionConfig = {
     delete: () => false,
     unlock: adminOnly,
   },
+  endpoints: [
+    { path: '/register', method: 'post', handler: registrationEndpoint },
+  ],
   hooks: {
     beforeValidate: [validateAccount],
     beforeLogin: [
@@ -125,7 +136,15 @@ export const Users: CollectionConfig = {
         value.length >= 12 ||
         'Use uma senha com pelo menos 12 caracteres.',
     },
-    { name: 'name', label: 'Nome completo', type: 'text', required: true },
+    {
+      name: 'name',
+      label: 'Nome completo',
+      type: 'text',
+      required: true,
+      maxLength: 120,
+      validate: (value: string | null | undefined) =>
+        !!value?.trim() || 'Informe o nome completo.',
+    },
     {
       name: 'role',
       label: 'Papel',
@@ -158,19 +177,22 @@ export const Users: CollectionConfig = {
         { label: 'Bloqueada', value: 'blocked' },
       ],
     },
-    { name: 'phone', label: 'Telefone de contato', type: 'text' },
+    {
+      name: 'phone',
+      label: 'Telefone de contato',
+      type: 'text',
+      maxLength: 40,
+      validate: (value: string | null | undefined) =>
+        !value ||
+        (value.replace(/\D/g, '').length >= 8 &&
+          value.replace(/\D/g, '').length <= 15) ||
+        'Informe um telefone com 8 a 15 dígitos.',
+    },
     {
       name: 'communityLink',
       label: 'Vínculo com a comunidade',
       type: 'select',
-      options: [
-        { label: 'Pai, mãe ou responsável', value: 'guardian' },
-        { label: 'Familiar de aluno', value: 'relative' },
-        { label: 'Amigo ou conhecido de uma família', value: 'friend' },
-        { label: 'Ex-aluno adulto', value: 'former-student' },
-        { label: 'Comunidade local', value: 'local' },
-        { label: 'Outro', value: 'other' },
-      ],
+      options: communityLinks.map(([value, label]) => ({ value, label })),
     },
     {
       name: 'adultConfirmed',
@@ -195,6 +217,7 @@ export const Users: CollectionConfig = {
       name: 'professionalSummary',
       label: 'Apresentação profissional',
       type: 'textarea',
+      maxLength: 3000,
     },
   ],
 }

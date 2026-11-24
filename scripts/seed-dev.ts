@@ -11,7 +11,7 @@ const payload = await getPayload({ config })
 try {
   await seedDevelopment(payload)
   console.info(
-    'Escola, categorias e contas fictícias preparadas. Registros existentes foram preservados.',
+    'Escola, contas, oportunidades e candidatura fictícias preparadas. Registros existentes foram preservados.',
   )
   console.info(
     'Contas: admin@conecta.test, diretora@conecta.test, prestador@conecta.test e prestadora@conecta.test.',

@@ -4,7 +4,7 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** M1 concluído localmente e implementação técnica do M2 entregue. A avaliação da publicação com a diretora permanece pendente em M2.7. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md) e [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md) para configuração, verificações e roteiro de avaliação.
+**Situação atual:** M1 concluído localmente e implementações técnicas de M2 e M3 entregues. As avaliações da publicação e da consulta com a diretora permanecem pendentes em M2.7 e M3.7. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md) e [M3 Participação](docs/m3-participacao.md) para configuração, verificações e roteiros de avaliação.
 
 Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta-comunidade/issues?q=is%3Aissue) e [milestones](https://github.com/sobucki/conecta-comunidade/milestones?state=all).
 
@@ -15,7 +15,7 @@ Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta
 | M0 Planejamento | Escopo, stack, regras e entregas definidos. | Refinamento dos requisitos. | Concluído |
 | [M1 Base e acessos](https://github.com/sobucki/conecta-comunidade/milestone/1) | Aplicação local com escola, contas e permissões. | M0 | Concluído localmente |
 | [M2 Publicação e divulgação](https://github.com/sobucki/conecta-comunidade/milestone/2) | Diretora publica; visitante consulta e compartilha. | M1 | Implementado localmente; em avaliação |
-| [M3 Participação](https://github.com/sobucki/conecta-comunidade/milestone/3) | Prestador se cadastra e gerencia suas candidaturas. | M2 | Planejado |
+| [M3 Participação](https://github.com/sobucki/conecta-comunidade/milestone/3) | Prestador se cadastra e gerencia suas candidaturas. | M2 | Implementado localmente; em avaliação |
 | [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Planejado |
 | [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Planejado |
 | [M6 Implantação e ativação](https://github.com/sobucki/conecta-comunidade/milestone/6) | Ambiente de destino verificado e piloto autorizado. | M5, infraestrutura e validação institucional | Pendente |
@@ -72,15 +72,17 @@ flowchart TD
 
 **Objetivo:** completar o percurso do interessado até uma candidatura válida e acompanhável.
 
-- [ ] Implementar cadastro mínimo, login, perfil e retorno à oportunidade após autenticação. ([#15](https://github.com/sobucki/conecta-comunidade/issues/15))
-- [ ] Permitir candidatura sem exigir confirmação do e-mail. ([#16](https://github.com/sobucki/conecta-comunidade/issues/16))
-- [ ] Coletar disponibilidade e concordância com o valor fixo e as condições publicadas. ([#17](https://github.com/sobucki/conecta-comunidade/issues/17))
-- [ ] Implementar Minhas candidaturas com informações e situação do próprio prestador. ([#18](https://github.com/sobucki/conecta-comunidade/issues/18))
-- [ ] Permitir editar, retirar e reenviar enquanto as inscrições estiverem abertas, preservando o histórico. ([#19](https://github.com/sobucki/conecta-comunidade/issues/19))
-- [ ] Bloquear duplicidades, inscrições fora do prazo e alterações das condições após a primeira candidatura. ([#20](https://github.com/sobucki/conecta-comunidade/issues/20))
+- [x] Implementar cadastro mínimo, login, perfil e retorno à oportunidade após autenticação. ([#15](https://github.com/sobucki/conecta-comunidade/issues/15))
+- [x] Permitir candidatura sem exigir confirmação do e-mail. ([#16](https://github.com/sobucki/conecta-comunidade/issues/16))
+- [x] Coletar disponibilidade e concordância com o valor fixo e as condições publicadas. ([#17](https://github.com/sobucki/conecta-comunidade/issues/17))
+- [x] Implementar Minhas candidaturas com informações e situação do próprio prestador. ([#18](https://github.com/sobucki/conecta-comunidade/issues/18))
+- [x] Permitir editar, retirar e reenviar enquanto as inscrições estiverem abertas, preservando o histórico. ([#19](https://github.com/sobucki/conecta-comunidade/issues/19))
+- [x] Bloquear duplicidades, inscrições fora do prazo e alterações das condições após a primeira candidatura. ([#20](https://github.com/sobucki/conecta-comunidade/issues/20))
 - [ ] Disponibilizar a consulta identificada de candidatos para a diretora e avaliar seu uso pelo celular. ([#21](https://github.com/sobucki/conecta-comunidade/issues/21))
 
 **Demonstração de conclusão:** o interessado chega por um link, cria sua conta, candidata-se e acompanha o registro. Ele consegue retirar e reenviar a candidatura sem criar outra ativa. Tentativas de acessar dados de outro prestador e envios duplicados são negados, inclusive sob concorrência.
+
+**Verificação atual:** percurso completo do prestador e consulta no painel exercitados pelo navegador com dados fictícios; 31 testes de integração e 15 percursos de navegador aprovados. A consulta identificada está implementada em M3.7; a sessão de avaliação com a diretora permanece pendente. Consulte o [guia do M3](docs/m3-participacao.md).
 
 ### M4 Seleção e exceções
 
@@ -159,7 +161,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-O próximo trabalho é concluir a avaliação de **M2.7** com a diretora. O marco técnico seguinte é **M3 Participação**, para cadastro público e candidaturas.
+As avaliações de **M2.7** e **M3.7** com a diretora permanecem pendentes. O marco técnico seguinte é **M4 Seleção e exceções**, para encerramento, seleção manual e tratamento dos demais resultados.
 
 ## 6 Evolução após o MVP
 
