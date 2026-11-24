@@ -4,7 +4,7 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** M1 Base e acessos implementado e verificado localmente. O próximo marco é M2. Datas, estimativas e distribuição entre integrantes permanecem em aberto, assim como os detalhes da hospedagem Hostinger. A configuração e as evidências do primeiro marco estão em [M1 Base e acessos](docs/m1-base-acessos.md).
+**Situação atual:** M1 concluído localmente e implementação técnica do M2 entregue. A avaliação da publicação com a diretora permanece pendente em M2.7. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md) e [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md) para configuração, verificações e roteiro de avaliação.
 
 Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta-comunidade/issues?q=is%3Aissue) e [milestones](https://github.com/sobucki/conecta-comunidade/milestones?state=all).
 
@@ -14,7 +14,7 @@ Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta
 | --- | --- | --- | --- |
 | M0 Planejamento | Escopo, stack, regras e entregas definidos. | Refinamento dos requisitos. | Concluído |
 | [M1 Base e acessos](https://github.com/sobucki/conecta-comunidade/milestone/1) | Aplicação local com escola, contas e permissões. | M0 | Concluído localmente |
-| [M2 Publicação e divulgação](https://github.com/sobucki/conecta-comunidade/milestone/2) | Diretora publica; visitante consulta e compartilha. | M1 | Planejado |
+| [M2 Publicação e divulgação](https://github.com/sobucki/conecta-comunidade/milestone/2) | Diretora publica; visitante consulta e compartilha. | M1 | Implementado localmente; em avaliação |
 | [M3 Participação](https://github.com/sobucki/conecta-comunidade/milestone/3) | Prestador se cadastra e gerencia suas candidaturas. | M2 | Planejado |
 | [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Planejado |
 | [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Planejado |
@@ -58,12 +58,12 @@ flowchart TD
 
 **Objetivo:** permitir que uma oportunidade seja publicada e compreendida por quem recebe o link.
 
-- [ ] Criar os layouts públicos e a edição de conteúdo institucional pelo administrador. ([#8](https://github.com/sobucki/conecta-comunidade/issues/8))
-- [ ] Implementar rascunho e publicação de oportunidades com categoria, local, prazos e valor fixo. ([#9](https://github.com/sobucki/conecta-comunidade/issues/9))
-- [ ] Informar responsabilidade por materiais e ferramentas nas condições do serviço. ([#10](https://github.com/sobucki/conecta-comunidade/issues/10))
-- [ ] Implementar até três fotos opcionais, com validação, permissões e versões reduzidas. ([#11](https://github.com/sobucki/conecta-comunidade/issues/11))
-- [ ] Exibir a página da escola, as oportunidades abertas e seus detalhes sem login. ([#12](https://github.com/sobucki/conecta-comunidade/issues/12))
-- [ ] Permitir copiar e compartilhar links, inclusive pelo WhatsApp. ([#13](https://github.com/sobucki/conecta-comunidade/issues/13))
+- [x] Criar os layouts públicos e a edição de conteúdo institucional pelo administrador. ([#8](https://github.com/sobucki/conecta-comunidade/issues/8))
+- [x] Implementar rascunho e publicação de oportunidades com categoria, local, prazos e valor fixo. ([#9](https://github.com/sobucki/conecta-comunidade/issues/9))
+- [x] Informar responsabilidade por materiais e ferramentas nas condições do serviço. ([#10](https://github.com/sobucki/conecta-comunidade/issues/10))
+- [x] Implementar até três fotos opcionais, com validação, permissões e versões reduzidas. ([#11](https://github.com/sobucki/conecta-comunidade/issues/11))
+- [x] Exibir a página da escola, as oportunidades abertas e seus detalhes sem login. ([#12](https://github.com/sobucki/conecta-comunidade/issues/12))
+- [x] Permitir copiar e compartilhar links, inclusive pelo WhatsApp. ([#13](https://github.com/sobucki/conecta-comunidade/issues/13))
 - [ ] Avaliar pelo celular a tarefa de publicação no painel da diretora. ([#14](https://github.com/sobucki/conecta-comunidade/issues/14))
 
 **Demonstração de conclusão:** a diretora publica uma oportunidade com foto e o visitante abre o link pelo celular sem cadastro. Rascunhos e suas fotos permanecem restritos à gestão.
@@ -159,7 +159,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-O próximo trabalho é **M2 Publicação e divulgação**, aproveitando a base de contas, escolas e permissões implementada no M1.
+O próximo trabalho é concluir a avaliação de **M2.7** com a diretora. O marco técnico seguinte é **M3 Participação**, para cadastro público e candidaturas.
 
 ## 6 Evolução após o MVP
 

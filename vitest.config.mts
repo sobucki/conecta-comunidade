@@ -13,6 +13,7 @@ if (
   )
 }
 process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
+process.env.MEDIA_DIR = '.tools/test-media'
 
 export default defineConfig({
   plugins: [tsconfigPaths()],

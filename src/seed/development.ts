@@ -120,5 +120,100 @@ export async function seedDevelopment(payload: Payload) {
       },
     })
   }
+  const administrator = (
+    await payload.find({
+      collection: 'users',
+      overrideAccess: true,
+      where: { email: { equals: 'admin@conecta.test' } },
+      limit: 1,
+    })
+  ).docs[0]
+  const content = await payload.findGlobal({
+    slug: 'site-content',
+    overrideAccess: true,
+    depth: 0,
+  })
+  if (!content.school)
+    await payload.updateGlobal({
+      slug: 'site-content',
+      overrideAccess: true,
+      data: { school: school.id },
+    })
+  const examples = [
+    {
+      categoryName: 'Pintura',
+      title: 'Pintura do muro de entrada',
+      description:
+        'Preparar a superfície e renovar a pintura do muro próximo ao portão. Demanda fictícia para demonstração do piloto.',
+      fixedAmount: 850,
+      location: 'Muro de entrada',
+      requirements: 'Experiência com pintura de superfícies externas.',
+    },
+    {
+      categoryName: 'Jardinagem',
+      title: 'Manutenção do jardim',
+      description:
+        'Retirar folhas secas, aparar a grama e cuidar dos canteiros da entrada. Demanda fictícia para demonstração do piloto.',
+      fixedAmount: 300,
+      location: 'Jardim da escola',
+      requirements: 'Conhecimentos básicos de jardinagem.',
+    },
+    {
+      categoryName: 'Marcenaria',
+      title: 'Reparo das portas da biblioteca',
+      description:
+        'Ajustar dobradiças e maçanetas das portas da biblioteca. Demanda fictícia para demonstração do piloto.',
+      fixedAmount: 450,
+      location: 'Biblioteca',
+      requirements: 'Experiência em pequenos reparos e ajustes de portas.',
+    },
+  ]
+  for (const example of examples) {
+    const found = await payload.find({
+      collection: 'opportunities',
+      overrideAccess: true,
+      where: {
+        and: [
+          { school: { equals: school.id } },
+          { title: { equals: example.title } },
+        ],
+      },
+      limit: 1,
+    })
+    if (found.docs.length) continue
+    const { categoryName, ...details } = example
+    const category = (
+      await payload.find({
+        collection: 'categories',
+        overrideAccess: true,
+        where: { name: { equals: categoryName } },
+        limit: 1,
+      })
+    ).docs[0]
+    const draft = await payload.create({
+      collection: 'opportunities',
+      user: administrator,
+      overrideAccess: false,
+      data: {
+        ...details,
+        school: school.id,
+        category: category.id,
+        status: 'DRAFT',
+        applicationDeadline: new Date(Date.now() + 14 * 86400000).toISOString(),
+        executionStart: new Date(Date.now() + 16 * 86400000).toISOString(),
+        executionEnd: new Date(Date.now() + 23 * 86400000).toISOString(),
+        materialsResponsibility: 'school',
+        toolsResponsibility: 'provider',
+      },
+    })
+    await payload.update({
+      collection: 'opportunities',
+      id: draft.id,
+      user: administrator,
+      overrideAccess: false,
+      context: { publishingOpportunity: true },
+      data: { status: 'OPEN' },
+    })
+  }
   return school
 }

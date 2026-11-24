@@ -9,6 +9,10 @@ import { Users } from './collections/Users'
 import { Schools } from './collections/Schools'
 import { Categories } from './collections/Categories'
 import { ActivityLogs } from './collections/ActivityLogs'
+import { Opportunities } from './collections/Opportunities'
+import { Media } from './collections/Media'
+import { SiteContent } from './globals/SiteContent'
+import sharp from 'sharp'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const secret = process.env.PAYLOAD_SECRET
@@ -28,7 +32,14 @@ export default buildConfig({
     meta: { titleSuffix: ' | Conecta Comunidade' },
   },
   i18n: { fallbackLanguage: 'pt', supportedLanguages: { pt } },
-  collections: [Users, Schools, Categories, ActivityLogs],
+  collections: [Users, Schools, Categories, ActivityLogs, Opportunities, Media],
+  globals: [SiteContent],
+  sharp,
+  upload: {
+    limits: { fileSize: 5 * 1024 * 1024 },
+    abortOnLimit: true,
+    responseOnLimit: 'Cada foto deve ter no máximo 5 MB.',
+  },
   secret,
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   graphQL: { disable: true },

@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { adminOnly, isActive } from '../access'
+import { adminOnly } from '../access'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -7,7 +7,7 @@ export const Categories: CollectionConfig = {
   admin: { useAsTitle: 'name', hidden: ({ user }) => user?.role !== 'admin' },
   access: {
     create: adminOnly,
-    read: ({ req }) => isActive(req.user),
+    read: () => true,
     update: adminOnly,
     delete: () => false,
   },

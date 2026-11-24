@@ -9,11 +9,8 @@ const dirname = path.dirname(__filename)
 const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
-    localPatterns: [
-      {
-        pathname: '/api/media/file/**',
-      },
-    ],
+    unoptimized: true,
+    localPatterns: [],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {

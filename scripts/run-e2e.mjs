@@ -22,6 +22,7 @@ const child = spawn(
       APP_URL: 'http://localhost:3100',
       NEXT_DIST_DIR: '.next-test',
       ALLOW_DEV_SEED: 'true',
+      MEDIA_DIR: '.tools/test-media',
     },
   },
 )

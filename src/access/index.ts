@@ -20,7 +20,8 @@ export const ownAccountOrAdmin: Access = ({ req }) => {
 
 export const schoolScope: Access = ({ req }) => {
   if (isAdministrator(req.user)) return true
-  if (!isActive(req.user) || !req.user.school) return false
+  if (!isActive(req.user) || req.user.role !== 'manager') return true
+  if (!req.user.school) return false
   const id =
     typeof req.user.school === 'object' ? req.user.school.id : req.user.school
   return { id: { equals: id } }

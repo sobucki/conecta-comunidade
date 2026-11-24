@@ -12,7 +12,7 @@ export default async function ResetPassword({
 }) {
   const { token } = await searchParams
   return (
-    <main>
+    <main id="conteudo" className="container account-page">
       <h1>Definir nova senha</h1>
       <p>Use uma senha com pelo menos 12 caracteres.</p>
       <ResetPasswordForm token={typeof token === 'string' ? token : ''} />

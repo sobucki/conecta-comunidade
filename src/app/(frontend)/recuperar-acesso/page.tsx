@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function RecoverAccess() {
   return (
-    <main>
+    <main id="conteudo" className="container account-page">
       <h1>Recuperar acesso</h1>
       <p>Informe seu e-mail para receber um link e definir uma nova senha.</p>
       <ForgotPasswordForm />

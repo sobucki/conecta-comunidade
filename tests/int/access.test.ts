@@ -259,7 +259,7 @@ describe('Contas e isolamento por escola', () => {
     })
     await expect(
       payload.find({
-        collection: 'schools',
+        collection: 'users',
         user: auth.user,
         overrideAccess: false,
       }),

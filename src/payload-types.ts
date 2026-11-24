@@ -71,6 +71,8 @@ export interface Config {
     schools: School;
     categories: Category;
     'activity-logs': ActivityLog;
+    opportunities: Opportunity;
+    media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     schools: SchoolsSelect<false> | SchoolsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'activity-logs': ActivityLogsSelect<false> | ActivityLogsSelect<true>;
+    opportunities: OpportunitiesSelect<false> | OpportunitiesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,8 +95,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-content': SiteContent;
+  };
+  globalsSelect: {
+    'site-content': SiteContentSelect<false> | SiteContentSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -194,6 +202,81 @@ export interface ActivityLog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opportunities".
+ */
+export interface Opportunity {
+  id: number;
+  title: string;
+  description: string;
+  category: number | Category;
+  /**
+   * Definida no cadastro e preservada nas alterações.
+   */
+  school?: (number | null) | School;
+  /**
+   * Informe a área do reparo, sem dados de alunos ou informações sensíveis.
+   */
+  location: string;
+  applicationDeadline: string;
+  fixedAmount: number;
+  executionStart: string;
+  executionEnd: string;
+  materialsResponsibility: 'school' | 'provider' | 'shared';
+  toolsResponsibility: 'school' | 'provider' | 'shared';
+  requirements?: string | null;
+  notes?: string | null;
+  /**
+   * Até três fotos em JPG, PNG ou WebP, de até 5 MB cada. Evite pessoas identificáveis.
+   */
+  photos?: (number | Media)[] | null;
+  status: 'DRAFT' | 'OPEN';
+  publishedAt?: string | null;
+  createdBy?: (number | null) | User;
+  publishedBy?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  school?: (number | null) | School;
+  uploadedBy?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    display?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -231,6 +314,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'activity-logs';
         value: number | ActivityLog;
+      } | null)
+    | ({
+        relationTo: 'opportunities';
+        value: number | Opportunity;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -342,6 +433,76 @@ export interface ActivityLogsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opportunities_select".
+ */
+export interface OpportunitiesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  school?: T;
+  location?: T;
+  applicationDeadline?: T;
+  fixedAmount?: T;
+  executionStart?: T;
+  executionEnd?: T;
+  materialsResponsibility?: T;
+  toolsResponsibility?: T;
+  requirements?: T;
+  notes?: T;
+  photos?: T;
+  status?: T;
+  publishedAt?: T;
+  createdBy?: T;
+  publishedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  school?: T;
+  uploadedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        display?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -379,6 +540,36 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-content".
+ */
+export interface SiteContent {
+  id: number;
+  projectName: string;
+  headline: string;
+  introduction: string;
+  about: string;
+  school?: (number | null) | School;
+  coverImage?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-content_select".
+ */
+export interface SiteContentSelect<T extends boolean = true> {
+  projectName?: T;
+  headline?: T;
+  introduction?: T;
+  about?: T;
+  school?: T;
+  coverImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
