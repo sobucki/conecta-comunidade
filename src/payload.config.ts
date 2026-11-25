@@ -90,6 +90,7 @@ export default buildConfig({
       host: process.env.SMTP_HOST || '127.0.0.1',
       port: Number(process.env.SMTP_PORT || 1025),
       secure: process.env.SMTP_SECURE === 'true',
+      requireTLS: process.env.NODE_ENV === 'production' && process.env.SMTP_SECURE !== 'true',
       ...(process.env.SMTP_USER
         ? {
             auth: {

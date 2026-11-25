@@ -13,3 +13,8 @@ coverage/
 .DS_Store
 media/
 .tools/
+!.env.production.example
+backups/
+.deploy-*.lock/
+
+.access*

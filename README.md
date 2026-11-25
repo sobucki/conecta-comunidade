@@ -60,3 +60,18 @@ Os testes verificam permissões reais, isolamento por escola, proteção de camp
 ## Preparação do piloto
 
 O M5 acrescenta os indicadores em `/admin/globals/pilot-dashboard` e configuração institucional em Conteúdo do site. O canal de suporte informado é `sobucki@gmail.com`, configurado no banco local. Responsável nominal, termos, privacidade, retenção e avaliação real com a diretora continuam pendentes. Consulte [M5 Preparação do piloto](docs/m5-preparacao-piloto.md) para operação, convenções de contagem e pendências para M6.
+
+
+## Implantação e ativação (M6)
+
+A homologação privada está implantada na VPS Hostinger KVM 2 (`ssh masque-vps`), em `/home/deploy/conecta-comunidade`, projeto Docker `conecta-staging`. O endereço [redeconectacomunidade.com.br](https://redeconectacomunidade.com.br) usa HTTPS e exige uma senha de acesso à homologação. O piloto ainda não está ativado para participantes reais. Banco e fotos são exclusivos da homologação; os serviços existentes da VPS continuam em seu projeto separado.
+
+Foram preparados imagem Docker, configuração de produção, bootstrap administrativo, migrações explícitas, verificação HTTP e backup/restauração com validação de hashes. O ensaio na VPS restaurou banco e fotos em outro destino vazio e conferiu o resultado da seleção e o histórico. O SMTP Hostinger foi configurado em 25/11/2026 e a aplicação enviou uma recuperação de senha para a caixa de teste autorizada. O usuário confirmou recebimento, redefinição e login em 25/11/2026. Cópia externa, rotina diária de backup e validações institucionais permanecem pendentes.
+
+Consulte [M6 Implantação e ativação](docs/m6-implantacao-ativacao.md) antes de operar a VPS. Para verificar a configuração local: `npm run test:deploy`. O guia inclui os comandos de instalação, recuperação e os critérios para ativar o piloto.
+
+Para acessar a homologação privada, mantenha `ssh -o ExitOnForwardFailure=yes -N -L 127.0.0.1:3200:127.0.0.1:3200 masque-vps` aberto e visite [localhost:3200](http://localhost:3200) ou [painel](http://localhost:3200/admin). O guia do M6 explica como consultar a senha fictícia do administrador e reiniciar o ambiente com o complemento de loopback.
+
+No domínio, a primeira tela de autenticação usa o usuário `homologacao`. Consulte sua senha por `ssh masque-vps 'cat /home/deploy/conecta-comunidade/.access.homologacao'`. O painel `/admin` usa a conta `admin@conecta.test`, com a senha fictícia já existente. O acesso por SSH continua disponível.
+
+O SMTP usa `smtp.hostinger.com:465` com TLS e remetente `acesso@redeconectacomunidade.com.br`. As credenciais ficam exclusivamente em `.env.smtp` na VPS (0600), carregadas por `deploy/compose.smtp.yaml` em formato raw. Inclua esse complemento ao recriar os serviços, conforme o guia do M6. O teste de e-mail da Hostinger termina em 24/12/2026, com renovação automática desativada.

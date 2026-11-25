@@ -1,0 +1,24 @@
+# Complemento da homologação por domínio; preserva o app de acesso por SSH.
+services:
+  app-domain:
+    image: ${APP_IMAGE:?}
+    restart: unless-stopped
+    env_file: ${DEPLOY_ENV_FILE:-../.env.production}
+    environment:
+      NODE_ENV: production
+      MEDIA_DIR: /app/media
+      APP_URL: https://redeconectacomunidade.com.br
+      DOMAIN: redeconectacomunidade.com.br
+      STAGING_SSH_ACCESS: 'false'
+      APP_NETWORK_ALIAS: conecta-domain-app
+    volumes:
+      - ${MEDIA_HOST_DIR:?}:/app/media
+    networks:
+      default:
+      proxy:
+        aliases:
+          - conecta-domain-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    stop_grace_period: 30s

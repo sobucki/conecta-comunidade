@@ -1,0 +1,41 @@
+# Usar sempre --env-file .env.production -p conecta-pilot; não combinar com compose.yaml.
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      POSTGRES_DB: ${POSTGRES_DB:?}
+    volumes:
+      - ${POSTGRES_HOST_DIR:?}:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    image: ${APP_IMAGE:?}
+    build:
+      context: ..
+    restart: unless-stopped
+    env_file: ${DEPLOY_ENV_FILE:-../.env.production}
+    environment:
+      NODE_ENV: production
+      MEDIA_DIR: /app/media
+    volumes:
+      - ${MEDIA_HOST_DIR:?}:/app/media
+    networks:
+      default:
+      proxy:
+        aliases:
+          - ${APP_NETWORK_ALIAS:-conecta-app}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    stop_grace_period: 30s
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:?}

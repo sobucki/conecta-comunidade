@@ -1,0 +1,11 @@
+# Incluir depois dos arquivos base/SSH/domínio. Gerar .env.smtp pelo terminal.
+# O formato raw preserva $ e aspas na senha, sem interpolação do Compose.
+services:
+  app:
+    env_file:
+      - path: ../.env.smtp
+        format: raw
+  app-domain:
+    env_file:
+      - path: ../.env.smtp
+        format: raw

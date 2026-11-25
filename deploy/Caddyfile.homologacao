@@ -1,0 +1,21 @@
+# Incorporar ao Caddy existente; o segredo de acesso fica no volume privado /data.
+redeconectacomunidade.com.br {
+    encode zstd gzip
+    request_body {
+        max_size 20MB
+    }
+    basic_auth {
+        import /data/conecta-homologacao-auth.caddy
+    }
+    header {
+        X-Robots-Tag "noindex, nofollow"
+        X-Content-Type-Options nosniff
+        Referrer-Policy strict-origin-when-cross-origin
+        -Server
+    }
+    reverse_proxy conecta-domain-app:3000
+}
+
+www.redeconectacomunidade.com.br {
+    redir https://redeconectacomunidade.com.br{uri} permanent
+}

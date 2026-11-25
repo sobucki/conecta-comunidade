@@ -4,7 +4,7 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M5 entregues; M5 mantém validações institucionais pendentes. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. Datas, estimativas e distribuição entre integrantes continuam em aberto, assim como os detalhes da Hostinger. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
+**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M5 entregues; M5 mantém validações institucionais pendentes. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. M6 em execução, com homologação privada na VPS Hostinger KVM 2; SMTP configurado e envio de recuperação solicitado; recuperação confirmada pelo usuário; backup externo e autorização de ativação permanecem pendentes. Datas, estimativas e distribuição entre integrantes continuam em aberto. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
 
 Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta-comunidade/issues?q=is%3Aissue) e [milestones](https://github.com/sobucki/conecta-comunidade/milestones?state=all).
 
@@ -18,7 +18,7 @@ Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta
 | [M3 Participação](https://github.com/sobucki/conecta-comunidade/milestone/3) | Prestador se cadastra e gerencia suas candidaturas. | M2 | Implementado localmente; em avaliação |
 | [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Implementado localmente; em avaliação |
 | [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Implementado localmente; validações pendentes |
-| [M6 Implantação e ativação](https://github.com/sobucki/conecta-comunidade/milestone/6) | Ambiente de destino verificado e piloto autorizado. | M5, infraestrutura e validação institucional | Pendente |
+| [M6 Implantação e ativação](https://github.com/sobucki/conecta-comunidade/milestone/6) | Ambiente de destino verificado e piloto autorizado. | M5, infraestrutura e validação institucional | Homologação privada implantada; ativação pendente |
 | [M7 Avaliação e encerramento](https://github.com/sobucki/conecta-comunidade/milestone/7) | Resultados do experimento e decisão de continuidade. | M6 e período de observação definido | Planejado |
 
 M1 a M5 correspondem às cinco entregas do plano. M6 reúne a implantação e as condições finais de ativação. M7 trata da condução e avaliação do experimento, sem acrescentar acompanhamento da execução dos serviços ao MVP.
@@ -121,15 +121,19 @@ flowchart TD
 
 **Objetivo:** verificar o ambiente de destino e ativar o piloto nas condições aprovadas pela escola.
 
-- [ ] Confirmar o plano Hostinger, execução de Node.js, acesso ao PostgreSQL e capacidade disponível. ([#37](https://github.com/sobucki/conecta-comunidade/issues/37))
-- [ ] Definir o mecanismo de implantação e o processo de build e migrações. ([#38](https://github.com/sobucki/conecta-comunidade/issues/38))
-- [ ] Configurar domínio, HTTPS, segredos da aplicação e envio de e-mail para recuperação de senha. ([#39](https://github.com/sobucki/conecta-comunidade/issues/39))
-- [ ] Garantir armazenamento persistente de fotos e separação entre dados fictícios e reais. ([#40](https://github.com/sobucki/conecta-comunidade/issues/40))
+- [x] Confirmar o plano Hostinger, execução de Node.js, acesso ao PostgreSQL e capacidade disponível. ([#37](https://github.com/sobucki/conecta-comunidade/issues/37))
+- [x] Definir o mecanismo de implantação e o processo de build e migrações. ([#38](https://github.com/sobucki/conecta-comunidade/issues/38))
+- [x] Configurar domínio, HTTPS, segredos da aplicação e envio de e-mail para recuperação de senha. ([#39](https://github.com/sobucki/conecta-comunidade/issues/39))
+- [x] Garantir armazenamento persistente de fotos e separação entre dados fictícios e reais. ([#40](https://github.com/sobucki/conecta-comunidade/issues/40))
 - [ ] Verificar a cobertura dos backups já informados da Hostinger para banco e fotos, frequência, destino e recuperação. ([#41](https://github.com/sobucki/conecta-comunidade/issues/41))
 - [ ] Atender à política de backup diário e antes de atualizações e concluir um teste de restauração. ([#42](https://github.com/sobucki/conecta-comunidade/issues/42))
-- [ ] Verificar cadastro, recuperação de acesso, publicação, candidatura e seleção no ambiente de destino com dados fictícios. ([#43](https://github.com/sobucki/conecta-comunidade/issues/43))
+- [x] Verificar cadastro, recuperação de acesso, publicação, candidatura e seleção no ambiente de destino com dados fictícios. ([#43](https://github.com/sobucki/conecta-comunidade/issues/43))
 - [ ] Confirmar autorização da escola, oportunidades reais, condições de divulgação, privacidade e período do piloto. ([#44](https://github.com/sobucki/conecta-comunidade/issues/44))
 - [ ] Cadastrar os dados autorizados, orientar a diretora e iniciar a divulgação. ([#45](https://github.com/sobucki/conecta-comunidade/issues/45))
+
+**Encaminhamento em 25/11/2026:** por solicitação do usuário, M6.5 e a parte pendente de M6.6 ficam adiadas, sem serem marcadas como concluídas. A escola real ainda não foi identificada. O usuário confirmou em 25/11/2026 que testou o fluxo completo sem dificuldades na homologação fictícia; essa avaliação preliminar foi concluída. A sessão com a diretora real permanece pendente. A próxima frente é M6.8: identificação da escola e validação institucional. Autorização institucional e ativação real permanecem pendentes.
+
+**Verificação atual:** homologação privada implantada em `masque-vps` (VPS KVM 2), com imagem Linux, seis migrações aplicadas em banco vazio e percurso HTTP fictício de cadastro, publicação com foto, candidatura e seleção aprovado. Backup de banco e fotos restaurado em destino separado, com histórico e hashes de fotos/versões reduzidas conferidos. M6.6 permanece aberto porque a política diária e a cópia externa ainda não foram atendidas; SMTP Hostinger configurado em 25/11/2026, com autenticação TLS aprovada e envio de recuperação pela aplicação; M6.7 concluído tecnicamente: em 25/11/2026 o usuário confirmou recebimento, redefinição e login. A avaliação humana com a diretora permanece nos marcos anteriores. Domínio `redeconectacomunidade.com.br` e HTTPS verificados, com senha de acesso à homologação; sem ativação para participantes reais. Consulte o [guia do M6](docs/m6-implantacao-ativacao.md).
 
 **Conclusão:** o ambiente de destino foi verificado, a restauração foi exercitada, o responsável pelo suporte está definido e a escola autorizou a ativação. A partir desse ponto, o piloto pode receber participantes e dados reais.
 
@@ -151,7 +155,7 @@ flowchart TD
 | Frente | Quando avançar | Resultado necessário |
 | --- | --- | --- |
 | Validação com escola e professor | Durante o desenvolvimento, usando demonstrações fictícias. | Autorização, demandas, condições do serviço, privacidade e período do experimento definidos antes da ativação. |
-| Confirmação da Hostinger | Quando o usuário disponibilizar os detalhes. | Compatibilidade da aplicação, banco, fotos, e-mail e backups confirmada antes de M6. |
+| Confirmação da Hostinger | VPS KVM 2 acessada e homologação privada implantada em M6. | Concluir cobertura de backups, rotina diária e cópia externa antes da ativação. |
 | Usabilidade com a diretora | Publicação em M2, consulta em M3 e seleção em M4. | Decisão fundamentada sobre aproveitar o painel ou adaptar a interface. |
 | Testes automatizados | Em cada marco de desenvolvimento. | Regras e fluxos relevantes verificados antes de declarar o marco concluído. |
 
@@ -163,7 +167,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. A preparação técnica de **M5** está entregue. Permanecem a validação institucional dos textos e retenção e a definição nominal do responsável; o e-mail de suporte informado foi configurado localmente. O próximo marco é **M6 Implantação e ativação**, condicionado à infraestrutura e às validações pendentes. Consulte o [guia do M5](docs/m5-preparacao-piloto.md). A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
+As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. A preparação técnica de **M5** está entregue. Permanecem a validação institucional dos textos e retenção e a definição nominal do responsável; o e-mail de suporte informado foi configurado localmente. O marco **M6 Implantação e ativação** está em execução, com homologação privada na VPS e restauração fictícia exercitada; a recuperação de senha foi confirmada e a ativação depende da política de backup diário/externo e das validações institucionais. Consulte o [guia do M5](docs/m5-preparacao-piloto.md). A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
 
 ## 6 Evolução após o MVP
 

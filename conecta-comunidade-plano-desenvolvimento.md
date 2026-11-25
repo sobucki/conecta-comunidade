@@ -273,11 +273,11 @@ A avaliação manual deverá observar clareza dos textos, erros de formulário, 
 
 Desenvolvimento e demonstrações utilizarão dados fictícios. O ambiente do piloto terá banco, arquivos e configurações separados, recebendo dados reais somente após autorização da escola. A forma de disponibilizar as demonstrações será escolhida conforme os recursos existentes.
 
-### Hospedagem pendente
+### Hospedagem e pendências
 
-O usuário informou possuir hospedagem na Hostinger e que o serviço já realiza backups. Permanecem pendentes a identificação do plano e a confirmação das capacidades contratadas. Não há definição final de implantação por Docker, processo Node.js ou outro mecanismo suportado.
+O usuário confirmou uma VPS Hostinger KVM 2, acessível por `ssh masque-vps`. Em M6, Docker/Compose, capacidade e PostgreSQL próprio do Conecta foram verificados com homologação privada. A implantação usa imagem Node.js 24.22.3 com build Next.js e migrações explícitas do Payload. Banco e fotos têm diretórios persistentes separados por ambiente; a outra aplicação da VPS permanece no projeto Docker existente. O guia [M6 Implantação e ativação](docs/m6-implantacao-ativacao.md) registra operação e evidências. O domínio `redeconectacomunidade.com.br`, adquirido na Hostinger, está apontado para a VPS e com HTTPS verificado. O acesso à homologação pelo domínio é protegido por senha; SMTP Hostinger configurado em 25/11/2026, com autenticação TLS aprovada e solicitação de recuperação enviada pela aplicação; recebimento, redefinição e login foram confirmados pelo usuário em 25/11/2026.
 
-Antes da implantação, confirmar:
+Antes da ativação, verificar os itens abaixo; o guia do M6 registra o que já foi exercitado:
 
 - Suporte à execução da aplicação Next.js e Payload e à versão Node.js compatível com as dependências escolhidas.
 - Disponibilidade e conexão com PostgreSQL.
@@ -293,14 +293,14 @@ Versões das dependências serão escolhidas e fixadas no início da implementa�
 
 A política acordada prevê backup diário do banco e das fotos, cópia antes de atualizações e armazenamento separado da instalação. Antes do piloto, será realizado um teste de restauração.
 
-O backup informado da Hostinger poderá atender a essa política se forem confirmados frequência, abrangência do PostgreSQL e das fotos, destino das cópias e procedimento de recuperação. A cobertura desses itens ainda não foi verificada. Eventuais lacunas deverão ser resolvidas antes de receber dados reais.
+O backup informado da Hostinger poderá atender a essa política se forem confirmados frequência, abrangência do PostgreSQL e das fotos, destino das cópias e procedimento de recuperação. A cobertura desses itens ainda não foi verificada. Em M6, um backup explícito de banco e fotos fictícios foi restaurado em destino vazio separado na VPS, com conferência de registros, histórico e hashes das fotos. Isso não comprova cobertura da Hostinger, agendamento diário ou cópia fora da VPS; essas lacunas deverão ser resolvidas antes de receber dados reais.
 
 ## 11 Pendências e condições para ativação
 
 | Pendência | Encaminhamento |
 | --- | --- |
 | Prazo de entrega e capacidade da equipe | Permanecem em aberto por decisão do usuário; dimensionar calendário depois. |
-| Plano e recursos da Hostinger | Usuário confirmará os detalhes; verificar compatibilidade antes da implantação. |
+| Plano e recursos da Hostinger | VPS KVM 2 confirmada e homologação privada implantada; concluir a rotina diária e a cobertura externa dos backups antes da ativação. |
 | Escola participante e autorização do piloto | Grupo valida com a direção e o professor. |
 | Demandas reais, categorias e condições do serviço | Diretora valida os reparos, valores, materiais, ferramentas e prazos. |
 | Recursos e procedimentos de contratação | Escola confirma condições antes de divulgar oportunidades como contratações reais. |
