@@ -75,3 +75,9 @@ Para acessar a homologação privada, mantenha `ssh -o ExitOnForwardFailure=yes 
 No domínio, a primeira tela de autenticação usa o usuário `homologacao`. Consulte sua senha por `ssh masque-vps 'cat /home/deploy/conecta-comunidade/.access.homologacao'`. O painel `/admin` usa a conta `admin@conecta.test`, com a senha fictícia já existente. O acesso por SSH continua disponível.
 
 O SMTP usa `smtp.hostinger.com:465` com TLS e remetente `acesso@redeconectacomunidade.com.br`. As credenciais ficam exclusivamente em `.env.smtp` na VPS (0600), carregadas por `deploy/compose.smtp.yaml` em formato raw. Inclua esse complemento ao recriar os serviços, conforme o guia do M6. O teste de e-mail da Hostinger termina em 24/12/2026, com renovação automática desativada.
+
+## Avaliação e encerramento (M7)
+
+O M7 foi concluído em 25/11/2026 como demonstração técnica para entrega acadêmica, por decisão do usuário. O [relatório final do M7](docs/m7-avaliacao-encerramento.md) apresenta objetivo, metodologia, resultados, seis indicadores agregados dos testes, análise das hipóteses, limitações, conclusão e roteiro de apresentação. O [snapshot agregado](docs/evidencias/m7-indicadores-homologacao-20261125.json) registra a extração e suas convenções, sem contatos ou identificadores de usuários.
+
+A entrega acadêmica foi encerrada no recorte técnico; o piloto com a escola foi adiado. Seus participantes, período, autorizações e decisão institucional de continuidade ou encerramento serão definidos na etapa futura. Os números registrados representam testes de homologação. O ambiente permanece protegido para apresentação; não houve desligamento de serviços, descarte de dados ou ativação para participantes reais.

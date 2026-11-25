@@ -9,12 +9,12 @@ O [roadmap de desenvolvimento](conecta-comunidade-roadmap.md) organiza os marcos
 | Informação | Definição |
 | --- | --- |
 | Data da consolidação | 23/11/2026 |
-| Situação | M1 e implementações técnicas de M2 a M5 verificadas localmente; preparação institucional de M5 pendente; avaliações de publicação, consulta e seleção com a diretora pendentes |
+| Situação | Homologação implantada e recuperação validada; M6 com backups e validação escolar adiados; M7 concluído como demonstração técnica para entrega acadêmica, sem piloto real ativado |
 | Público do piloto | Uma escola e participantes adultos de sua comunidade |
 | Primeira entrega do produto | Fluxo até a seleção, aguardando formalização externa |
 | Prazo e disponibilidade da equipe | Em aberto |
 | Custo recorrente alvo | R$ 0, utilizando recursos disponíveis; viabilidade de implantação a confirmar |
-| Hospedagem prevista | Infraestrutura própria na Hostinger; detalhes pendentes |
+| Hospedagem | VPS Hostinger KVM 2 com homologação protegida por senha e domínio HTTPS; operação registrada no guia do M6 |
 
 ## 1 Escopo acordado
 
@@ -312,6 +312,10 @@ O backup informado da Hostinger poderá atender a essa política se forem confir
 | Convenções dos indicadores | Detalhar contagem de reenvios e períodos na entrega 5, antes de usar resultados na avaliação acadêmica. |
 
 O planejamento técnico pode ser executado com dados fictícios enquanto essas definições são tratadas. A divulgação com participantes e dados reais exige autorização, conteúdo validado e condições operacionais verificadas.
+
+### Conclusão acadêmica da demonstração técnica
+
+Em 25/11/2026, o usuário decidiu finalizar a entrega acadêmica como demonstração técnica do MVP e adiar o piloto com a escola. O M7 foi concluído nesse recorte, com relatório de objetivo, método, resultados, indicadores da homologação, análise das hipóteses, limitações e decisão de escopo. Os registros de teste não são evidência de adesão espontânea, contratação ou renda. A homologação protegida é mantida para apresentação; não foi solicitado desligamento da infraestrutura ou descarte dos registros. O período do experimento real, seus responsáveis e sua decisão institucional de continuidade ou encerramento serão tratados no piloto futuro. Consulte o [relatório final do M7](docs/m7-avaliacao-encerramento.md).
 
 ## 12 Relação com os requisitos iniciais
 

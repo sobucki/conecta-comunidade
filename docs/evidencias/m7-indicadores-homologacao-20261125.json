@@ -1,0 +1,22 @@
+{
+  "collectedAt": "2026-11-25T14:40:19.161Z",
+  "environment": "homologacao",
+  "purpose": "technical_demonstration_only",
+  "startDate": "2026-11-24",
+  "endDate": "2026-11-25",
+  "timezone": "America/Sao_Paulo",
+  "metrics": {
+    "registered": 2,
+    "participants": 1,
+    "published": 2,
+    "submissions": 2,
+    "first_submissions": 2,
+    "resubmissions": 0,
+    "opportunities_with_candidates": 2,
+    "average_seconds": 46.5205,
+    "from": "2026-11-24T03:00:00.000Z",
+    "until": "2026-11-26T03:00:00.000Z",
+    "scope": "Todas as escolas",
+    "percentage": 100
+  }
+}

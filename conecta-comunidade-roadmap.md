@@ -4,7 +4,7 @@ O roadmap organiza a construção do MVP até a seleção manual de um prestador
 
 O [plano de desenvolvimento](conecta-comunidade-plano-desenvolvimento.md) detalha as regras, a arquitetura e os testes. Este roadmap orienta a ordem de execução e o acompanhamento das entregas.
 
-**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M5 entregues; M5 mantém validações institucionais pendentes. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. M6 em execução, com homologação privada na VPS Hostinger KVM 2; SMTP configurado e envio de recuperação solicitado; recuperação confirmada pelo usuário; backup externo e autorização de ativação permanecem pendentes. Datas, estimativas e distribuição entre integrantes continuam em aberto. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
+**Situação atual:** M1 concluído localmente e implementações técnicas de M2 a M5 entregues; M5 mantém validações institucionais pendentes. As avaliações de publicação, consulta e seleção com a diretora permanecem pendentes em M2.7, M3.7 e M4.8. M6 com pendências adiadas e M7 concluído como demonstração técnica para entrega acadêmica, usando a homologação privada na VPS Hostinger KVM 2; SMTP configurado e envio de recuperação solicitado; recuperação confirmada pelo usuário; backup externo e autorização de ativação permanecem pendentes. Datas, estimativas e distribuição entre integrantes continuam em aberto. Consulte [M1 Base e acessos](docs/m1-base-acessos.md), [M2 Publicação e divulgação](docs/m2-publicacao-divulgacao.md), [M3 Participação](docs/m3-participacao.md) e [M4 Seleção e exceções](docs/m4-selecao-excecoes.md) para configuração, verificações e roteiros de avaliação.
 
 Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta-comunidade/issues?q=is%3Aissue) e [milestones](https://github.com/sobucki/conecta-comunidade/milestones?state=all).
 
@@ -19,7 +19,7 @@ Acompanhamento no GitHub: [issues do roadmap](https://github.com/sobucki/conecta
 | [M4 Seleção e exceções](https://github.com/sobucki/conecta-comunidade/milestone/4) | Diretora seleciona e trata os demais resultados. | M3 | Implementado localmente; em avaliação |
 | [M5 Preparação do piloto](https://github.com/sobucki/conecta-comunidade/milestone/5) | Indicadores, conteúdo e percursos validados. | M4 | Implementado localmente; validações pendentes |
 | [M6 Implantação e ativação](https://github.com/sobucki/conecta-comunidade/milestone/6) | Ambiente de destino verificado e piloto autorizado. | M5, infraestrutura e validação institucional | Homologação privada implantada; ativação pendente |
-| [M7 Avaliação e encerramento](https://github.com/sobucki/conecta-comunidade/milestone/7) | Resultados do experimento e decisão de continuidade. | M6 e período de observação definido | Planejado |
+| [M7 Avaliação e encerramento](https://github.com/sobucki/conecta-comunidade/milestone/7) | Relatório final da demonstração técnica e decisão de adiar o piloto escolar. | Homologação verificada; piloto futuro depende de M6 | Concluído no recorte acadêmico de demonstração técnica |
 
 M1 a M5 correspondem às cinco entregas do plano. M6 reúne a implantação e as condições finais de ativação. M7 trata da condução e avaliação do experimento, sem acrescentar acompanhamento da execução dos serviços ao MVP.
 
@@ -131,7 +131,7 @@ flowchart TD
 - [ ] Confirmar autorização da escola, oportunidades reais, condições de divulgação, privacidade e período do piloto. ([#44](https://github.com/sobucki/conecta-comunidade/issues/44))
 - [ ] Cadastrar os dados autorizados, orientar a diretora e iniciar a divulgação. ([#45](https://github.com/sobucki/conecta-comunidade/issues/45))
 
-**Encaminhamento em 25/11/2026:** por solicitação do usuário, M6.5 e a parte pendente de M6.6 ficam adiadas, sem serem marcadas como concluídas. A escola real ainda não foi identificada. O usuário confirmou em 25/11/2026 que testou o fluxo completo sem dificuldades na homologação fictícia; essa avaliação preliminar foi concluída. A sessão com a diretora real permanece pendente. A próxima frente é M6.8: identificação da escola e validação institucional. Autorização institucional e ativação real permanecem pendentes.
+**Encaminhamento em 25/11/2026:** por solicitação do usuário, M6.5 e a parte pendente de M6.6 ficam adiadas, sem serem marcadas como concluídas. A escola real ainda não foi identificada. O usuário confirmou em 25/11/2026 que testou o fluxo completo sem dificuldades na homologação fictícia; essa avaliação preliminar foi concluída. A sessão com a diretora real permanece pendente. A validação institucional de M6.8 também foi adiada por solicitação do usuário; avançou-se para a preparação do M7 com os dados de homologação. Autorização institucional e ativação real permanecem pendentes.
 
 **Verificação atual:** homologação privada implantada em `masque-vps` (VPS KVM 2), com imagem Linux, seis migrações aplicadas em banco vazio e percurso HTTP fictício de cadastro, publicação com foto, candidatura e seleção aprovado. Backup de banco e fotos restaurado em destino separado, com histórico e hashes de fotos/versões reduzidas conferidos. M6.6 permanece aberto porque a política diária e a cópia externa ainda não foram atendidas; SMTP Hostinger configurado em 25/11/2026, com autenticação TLS aprovada e envio de recuperação pela aplicação; M6.7 concluído tecnicamente: em 25/11/2026 o usuário confirmou recebimento, redefinição e login. A avaliação humana com a diretora permanece nos marcos anteriores. Domínio `redeconectacomunidade.com.br` e HTTPS verificados, com senha de acesso à homologação; sem ativação para participantes reais. Consulte o [guia do M6](docs/m6-implantacao-ativacao.md).
 
@@ -139,16 +139,28 @@ flowchart TD
 
 ### M7 Avaliação e encerramento
 
-**Objetivo:** analisar a participação e definir o destino do sistema ao término do experimento.
+**Objetivo desta entrega:** consolidar a avaliação da demonstração técnica e registrar a decisão de encerramento do recorte acadêmico.
+
+**Situação em 25/11/2026:** concluído como demonstração técnica para entrega acadêmica, conforme decisão do usuário. O piloto com a escola foi adiado para uma etapa futura. O [relatório final do M7](docs/m7-avaliacao-encerramento.md) registra objetivo, método, resultados, análise das hipóteses, limitações, decisão de escopo e roteiro de apresentação.
+
+**Entrega acadêmica concluída:**
+
+- [x] Consolidar evidências técnicas e o relato de teste do usuário, identificado como avaliação preliminar de uma pessoa.
+- [x] Registrar os seis indicadores da homologação em snapshot agregado com período, horário e convenções.
+- [x] Consolidar indicadores e observações com dados agregados para o trabalho acadêmico, no recorte da demonstração técnica. ([#49](https://github.com/sobucki/conecta-comunidade/issues/49))
+- [x] Avaliar as hipóteses e limitações sem equiparar os testes a adesão real, contratação ou renda gerada. ([#50](https://github.com/sobucki/conecta-comunidade/issues/50))
+- [x] Registrar a decisão do usuário de concluir a entrega como demonstração técnica, manter a homologação protegida e deixar o piloto escolar para depois.
+
+**Atividades transferidas para o piloto futuro:**
 
 - [ ] Acompanhar adesão, candidaturas e dificuldades durante o período definido com a escola. ([#46](https://github.com/sobucki/conecta-comunidade/issues/46))
-- [ ] Atender solicitações de suporte e registrar ajustes necessários. ([#47](https://github.com/sobucki/conecta-comunidade/issues/47))
+- [ ] Atender solicitações de suporte de participantes e registrar ajustes necessários durante o piloto. ([#47](https://github.com/sobucki/conecta-comunidade/issues/47))
 - [ ] Coletar feedback voluntário externamente, quando aplicável. ([#48](https://github.com/sobucki/conecta-comunidade/issues/48))
-- [ ] Consolidar indicadores e observações com dados agregados para o trabalho acadêmico. ([#49](https://github.com/sobucki/conecta-comunidade/issues/49))
-- [ ] Avaliar as hipóteses e limitações do experimento sem equiparar seleção a contratação ou renda gerada. ([#50](https://github.com/sobucki/conecta-comunidade/issues/50))
-- [ ] Registrar a decisão de continuidade ou encerramento, o responsável e o tratamento dos dados conforme as definições institucionais. ([#51](https://github.com/sobucki/conecta-comunidade/issues/51))
+- [ ] Registrar a decisão institucional de continuidade ou encerramento do piloto, o responsável e o tratamento dos dados conforme as definições da escola. ([#51](https://github.com/sobucki/conecta-comunidade/issues/51))
 
-**Conclusão:** os resultados estão consolidados e existe uma decisão explícita sobre continuidade, suporte e encerramento do piloto.
+**Resultados registrados:** snapshot de homologação de 24 a 25/11/2026, extraído às 11:40:19 de 25/11 no horário de Brasília: duas contas de teste cadastradas, uma participante, duas oportunidades publicadas e dois primeiros envios, sem reenvios. As duas oportunidades receberam candidatura; tempo médio de 46,52 segundos. O usuário confirmou o fluxo completo sem dificuldades e a recuperação de senha com recebimento, redefinição e login.
+
+**Encerramento:** relatório finalizado e decisão de escopo registrada. O M7 está concluído para a entrega acadêmica de demonstração técnica. O experimento escolar não foi realizado; sua avaliação e seu encerramento institucional permanecem como trabalho futuro, após as condições do M6. A homologação permanece protegida, sem desligamento da infraestrutura ou descarte de dados solicitado.
 
 ## 4 Trabalho em paralelo
 
@@ -167,7 +179,7 @@ Um marco será considerado concluído quando suas tarefas estiverem entregues, s
 
 As caixas deste documento representam trabalho a executar. A situação inicial deve ser atualizada conforme o avanço real, sem confundir conclusão de planejamento com funcionalidade implementada. Datas e distribuição de tarefas serão acrescentadas quando prazo e disponibilidade da equipe forem definidos.
 
-As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. A preparação técnica de **M5** está entregue. Permanecem a validação institucional dos textos e retenção e a definição nominal do responsável; o e-mail de suporte informado foi configurado localmente. O marco **M6 Implantação e ativação** está em execução, com homologação privada na VPS e restauração fictícia exercitada; a recuperação de senha foi confirmada e a ativação depende da política de backup diário/externo e das validações institucionais. Consulte o [guia do M5](docs/m5-preparacao-piloto.md). A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
+As avaliações de **M2.7**, **M3.7** e **M4.8** com a diretora permanecem pendentes. A preparação técnica de **M5** está entregue. Permanecem a validação institucional dos textos e retenção e a definição nominal do responsável; o e-mail de suporte informado foi configurado localmente. O marco **M6 Implantação e ativação** está em execução, com homologação privada na VPS e restauração fictícia exercitada; a recuperação de senha foi confirmada e a ativação depende da política de backup diário/externo e das validações institucionais. Por solicitação do usuário, validação escolar e backups ficam pendentes enquanto o M7 foi concluído como demonstração técnica para entrega acadêmica; a ativação do piloto não foi realizada. Consulte o [guia do M7](docs/m7-avaliacao-encerramento.md). A conclusão integral de M4 depende da avaliação real do painel e dos ajustes decorrentes.
 
 ## 6 Evolução após o MVP
 
